@@ -10,8 +10,13 @@ class Entity {
     onCollision(tag) {
 
     }
+    // updates that take place every frame
+    update() {
+        
+    }
     // getters
     getPos(){return this.pos}
     getVelocity(){return this.velocity}
     getTag(){return this.tag}
+    getRadius(){return this.radius}
 }
