@@ -11,12 +11,14 @@ class Entity {
 
     }
     // updates that take place every frame
-    update() {
-        
+    update(deltaTime) {
+
     }
     // getters
     getPos(){return this.pos}
     getVelocity(){return this.velocity}
     getTag(){return this.tag}
     getRadius(){return this.radius}
+    // setters
+    setPos(pos){this.pos = pos}
 }

@@ -1,7 +1,8 @@
 class Game {
-    constructor(player){
+    constructor(player,bounds){
         this.entities = [player]
         this.player = player;
+        this.bounds = bounds;
         //this.room = new Room(0)
         //createCanvas(400, 400);
     }
@@ -20,11 +21,16 @@ class Game {
         }
     }
     // update entities and check collisions
-    update() {
+    update(deltaTime) {
         this.entities.forEach(entity => {
             // update the entity
-            entity.update();
-            // move the entity
+            entity.update(deltaTime);
+            // update position
+            console.log(deltaTime);
+            if (entity.pos.x < this.bounds.x)
+                entity.pos.x += entity.velocity.x * deltaTime;
+            if (entity.pos.y < this.bounds.y)
+                entity.pos.y += entity.velocity.y * deltaTime;
             // collide entities
         })
     }
