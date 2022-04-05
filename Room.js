@@ -1,7 +1,8 @@
 class Room {
-    
+
     constructor(levelNum) {
-        this.enemies = generateEnemies(levelNum);
+        this.enemies = this.generateEnemies(levelNum);
+        this.obstacles = [];
     }
 
     generateEnemies(levelNum) {
