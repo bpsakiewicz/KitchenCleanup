@@ -10,7 +10,9 @@ class Entity {
     // action on collision
     onCollision(tag) {
         // TEMPORARY
-        this.velocity.set(0,0);
+        if (tag == "player") {
+            Game.getInstance().destroy(this);
+        }
     }
     // updates that take place every frame
     update(deltaTime) {
