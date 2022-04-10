@@ -17,7 +17,7 @@ class Game {
     // simulation
     draw() {
         for (var i = 0; i < this.entities.length; i++) {
-            circle(this.entities[i].getPos().x,this.entities[i].getPos().y,this.entities[i].getRadius())
+            circle(this.entities[i].getPos().x,this.entities[i].getPos().y,this.entities[i].getRadius() * 2)
         }
     }
     // update entities and check collisions
@@ -31,9 +31,13 @@ class Game {
             if (entity.pos.y < this.bounds.y)
                 entity.pos.y += entity.velocity.y * deltaTime;
             // collide entities
-            for (let e in this.entities) {
-                //if (e == entity) console.log("SELF")
-                //if (entity.getCollider().checkCollision(e.getCollider())) console.log("COLLISIONNNNNNNN");
+            for (var i = 0; i < this.entities.length; i++) {
+                if (entity == this.entities[i]) continue;
+                //console.log(this.entities[i].getCollider());
+                if (entity.getCollider().checkCollision(this.entities[i].getCollider())) {
+                    entity.onCollision();
+                    this.entities[i].onCollision();
+                }
             }
         })
     }

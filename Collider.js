@@ -10,11 +10,10 @@ class CircleCollider extends Collider {
         this.radius = radius;
     }
     checkCollision(other) {
-        if (typeof other == 'CircleCollider') {
-            if (p5.dist(this.pos.x,this.pos.y,other.getPos().x,other.getPos().y) == this.radius + other.getRadius())
+            if (dist(this.pos.x,this.pos.y,other.getPos().x,other.getPos().y) < this.radius + other.getRadius())
                 return true;
             else return false;
-        }
+        
     }
     getRadius(){return this.radius}
 }

@@ -5,11 +5,12 @@ class Entity {
         this.velocity = velocity; // float tuple
         this.tag = tag; // string
         this.radius = radius; // float
-        if (collider_type == "circle") this.collider = new CircleCollider(pos,radius);
+        if (collider_type == "circle") this.collider = new CircleCollider(pos,this.radius);
     }
     // action on collision
     onCollision(tag) {
-
+        // TEMPORARY
+        this.velocity.set(0,0);
     }
     // updates that take place every frame
     update(deltaTime) {

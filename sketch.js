@@ -1,10 +1,10 @@
 
-var player = new Entity(new p5.Vector(200,200), new p5.Vector(20,20), "player", 20,"circle");
+var player = new Entity(new p5.Vector(200,200), new p5.Vector(30,40), "player", 20,"circle");
 var g = new Game(player,new p5.Vector(800,800));
-var TESTBUMPER = new Entity(new p5.Vector(400,400), new p5.Vector(0,0),"BUMPER",100,"circle");
+var TESTBUMPER = new Entity(new p5.Vector(320,360), new p5.Vector(15,20),"BUMPER",100,"circle");
 var timelastcalled;
 function setup() {
-  createCanvas(800, 800);
+  createCanvas(1000, 800);
   timelastcalled = millis();
   g.instantiate(TESTBUMPER);
 }
