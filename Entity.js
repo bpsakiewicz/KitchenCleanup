@@ -1,10 +1,11 @@
 class Entity {
 
-    constructor(pos,velocity, tag, radius) {
+    constructor(pos,velocity, tag, radius,collider_type) {
         this.pos = pos; // float tuple 
         this.velocity = velocity; // float tuple
         this.tag = tag; // string
         this.radius = radius; // float
+        if (collider_type == "circle") this.collider = new CircleCollider(pos,radius);
     }
     // action on collision
     onCollision(tag) {
@@ -19,6 +20,7 @@ class Entity {
     getVelocity(){return this.velocity}
     getTag(){return this.tag}
     getRadius(){return this.radius}
+    getCollider(){return this.collider}
     // setters
     setPos(pos){this.pos = pos}
 }

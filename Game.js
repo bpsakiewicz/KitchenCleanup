@@ -17,7 +17,7 @@ class Game {
     // simulation
     draw() {
         for (var i = 0; i < this.entities.length; i++) {
-            circle(this.entities[i].getPos().x,this.entities[i].getPos().y,40)
+            circle(this.entities[i].getPos().x,this.entities[i].getPos().y,this.entities[i].getRadius())
         }
     }
     // update entities and check collisions
@@ -26,12 +26,21 @@ class Game {
             // update the entity
             entity.update(deltaTime);
             // update position
-            console.log(deltaTime);
             if (entity.pos.x < this.bounds.x)
                 entity.pos.x += entity.velocity.x * deltaTime;
             if (entity.pos.y < this.bounds.y)
                 entity.pos.y += entity.velocity.y * deltaTime;
             // collide entities
+            for (let e in this.entities) {
+                //if (e == entity) console.log("SELF")
+                //if (entity.getCollider().checkCollision(e.getCollider())) console.log("COLLISIONNNNNNNN");
+            }
         })
     }
 }
+/* 
+special weapon ideas
+    pea shooter
+    hot chili pepper
+    spatula
+*/
