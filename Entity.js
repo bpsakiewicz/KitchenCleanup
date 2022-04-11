@@ -6,6 +6,7 @@ class Entity {
         this.tag = tag; // string
         this.radius = radius; // float
         if (collider_type == "circle") this.collider = new CircleCollider(pos,this.radius);
+        if (collider_type ==  "box") this.collider = new BoxCollider(pos, this.radius, this.radius);
     }
     // action on collision
     onCollision(tag) {

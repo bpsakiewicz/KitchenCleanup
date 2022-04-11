@@ -31,13 +31,16 @@ class Game {
     // simulation
     draw() {
         for (var i = 0; i < this.entities.length; i++) {
-            circle(this.entities[i].getPos().x,this.entities[i].getPos().y,this.entities[i].getRadius() * 2)
+            var pos = this.entities[i].getPos();
+            if (this.entities[i].getCollider().getType() == "circle") circle(pos.x, pos.y, this.entities[i].getRadius() * 2)
+            else if (this.entities[i].getCollider().getType() == "box") rect(pos.x, pos.y, this.entities[i].getRadius(), this.entities[i].getRadius())
         }
     }
 
     // update entities and check collisions
     update(deltaTime) {
-        this.entities.forEach(entity => {
+        for (var i = 0; i < this.entities.length; i++) {
+            var entity = this.entities[i];
             // update the entity
             entity.update(deltaTime);
             // update position
@@ -46,15 +49,16 @@ class Game {
             if (entity.pos.y < this.bounds.y)
                 entity.pos.y += entity.velocity.y * deltaTime;
             // collide entities
-            for (var i = 0; i < this.entities.length; i++) {
-                if (entity == this.entities[i]) continue;
+            for (var j = i+1; j < this.entities.length; j++) {
+                //console.log(i,j);
+                //if (entity == this.entities[j]) continue;
                 //console.log(this.entities[i].getCollider());
-                if (entity.getCollider().checkCollision(this.entities[i].getCollider())) {
-                    entity.onCollision(this.entities[i].getTag());
-                    this.entities[i].onCollision(entity.getTag());
+                if (entity.getCollider().checkCollision(this.entities[j].getCollider())) {
+                    entity.onCollision(this.entities[j].getTag());
+                    this.entities[j].onCollision(entity.getTag());
                 }
             }
-        })
+        }
     }
 }
 /* 
