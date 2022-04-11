@@ -51,7 +51,16 @@ class BoxCollider extends Collider {
     checkCollision(other) {
         var opos = other.getPos();
         // check each edge of rect for collision
-        return this.inRect(opos, this)
+
+        if (other.getType() == "circle") return this.inRect(opos, this);
+        if (other.getType() == "box") {
+            return (this.inRect(this.pos,other) || 
+                this.inRect(new p5.Vector(this.pos.x, this.pos.y + this.height),other) || 
+                this.inRect(new p5.Vector(this.pos.x + this.width, this.pos.y),other) || 
+                this.inRect(new p5.Vector(this.pos.x + this.width, this.pos.y + this.height),other) 
+            )
+        }
+        return false;
         //return this.lineCircle(opos, new p5.Vector(opos.x,opos.y - this.getHeight()), other)
     }
     getWidth() {return this.width}
