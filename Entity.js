@@ -11,6 +11,7 @@ class Entity {
     // action on collision
     onCollision(tag) {
         // TEMPORARY
+        console.log(this.tag)
         if (tag == "player") {
             Game.getInstance().destroy(this);
         }

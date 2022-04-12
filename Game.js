@@ -9,7 +9,6 @@ class Game {
         this.entities = [player]
         this.player = player;
         this.bounds = bounds;
-        //this.room = new Room(0)
         //createCanvas(400, 400);
     }
     // singleton instance
@@ -62,8 +61,7 @@ class Game {
     }
 }
 /* 
-special weapon ideas
-    pea shooter
-    hot chili pepper
-    spatula
+liam TODO
+room loading
+give collision angle with OnCollision
 */
