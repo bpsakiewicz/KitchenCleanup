@@ -1,2 +1,2 @@
 # Kitchen Cleanup
-## Benny Sakiewicz, Liam Semeria, Sam Mast
+## Benny Sakiewicz, Liam Semeria, Samuel Mast
