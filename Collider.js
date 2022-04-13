@@ -101,4 +101,7 @@ class BoxCollider extends Collider {
     }
     getWidth() {return this.width}
     getHeight() {return this.height}
+    // setters
+    setWidth(width) {this.width = width}
+    setHeight(height) {this.height = height}
 }

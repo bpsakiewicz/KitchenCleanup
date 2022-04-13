@@ -32,7 +32,7 @@ class Game {
         for (var i = 0; i < this.entities.length; i++) {
             var pos = this.entities[i].getPos();
             if (this.entities[i].getCollider().getType() == "circle") circle(pos.x, pos.y, this.entities[i].getRadius() * 2)
-            else if (this.entities[i].getCollider().getType() == "box") rect(pos.x, pos.y, this.entities[i].getRadius(), this.entities[i].getRadius())
+            else if (this.entities[i].getCollider().getType() == "box") rect(pos.x, pos.y, this.entities[i].getCollider().getWidth(), this.entities[i].getCollider().getHeight())
         }
     }
 
@@ -53,8 +53,8 @@ class Game {
                 //if (entity == this.entities[j]) continue;
                 //console.log(this.entities[i].getCollider());
                 if (entity.getCollider().checkCollision(this.entities[j].getCollider())) {
-                    entity.onCollision(this.entities[j].getTag());
-                    this.entities[j].onCollision(entity.getTag());
+                    entity.onCollision(this.entities[j]);
+                    this.entities[j].onCollision(entity);
                 }
             }
         }
@@ -62,6 +62,9 @@ class Game {
 }
 /* 
 liam TODO
+entity.radius ins TEMPORARY
 room loading
 give collision angle with OnCollision
+loading pictures
+start menu as room/floor
 */
