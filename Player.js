@@ -21,10 +21,11 @@ class Player extends Entity{
 
     update(){
         //adjusts position to velocity of player
+        this.checkBoundaries();
         this.playerInput();
         this.pos.x += this.velocity.x;
         this.pos.y += this.velocity.y;
-        //console.log(this.getPos());
+        console.log(this.getPos());
         //console.log(this.getVelocity());
     }
 
@@ -37,5 +38,16 @@ class Player extends Entity{
         if (keyIsDown(83)) dir.y = 5;
         this.velocity.x = (dir.x)
         this.velocity.y = (dir.y)
+    }
+    
+    checkBoundaries(){
+        /*if(this.pos.x < 0 || this.pos.x > 1200 || this.pos.y < 0 || this.pos.y > 800){
+            this.vel.x = 0;
+            this.vel.y = 0;
+        }*/
+        if(this.pos.x < 0) this.pos.x += 5.5;
+        if(this.pos.x > 1180) this.pos.x -=5.5;
+        if(this.pos.y < 0) this.pos.y += 5.5;
+        if(this.pos.y > 780) this.pos.y -=5.5;
     }
 }
