@@ -5,7 +5,7 @@ class Entity {
         this.velocity = velocity; // float tuple
         this.tag = tag; // string
         this.radius = radius; // float
-        this.img = 0
+        this.img = null
         if (collider_type == "circle") this.collider = new CircleCollider(pos,this.radius);
         if (collider_type ==  "box") this.collider = new BoxCollider(pos, this.radius, this.radius);
     }
