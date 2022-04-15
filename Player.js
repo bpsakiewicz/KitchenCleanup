@@ -4,7 +4,7 @@ class Player extends Entity{
         if(Player.instance){
             throw new Error("Player already made!");
         }
-        super(new p5.Vector(50,400), new p5.Vector(0,0), "player", 60,"box");
+        super(new p5.Vector(50,400), new p5.Vector(0,0), "player", "box", new p5.Vector(60,60));
         Player.instance = this;
         //creates default player    
         this.alive = true;

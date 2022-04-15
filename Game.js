@@ -9,6 +9,7 @@ class Game {
         this.entities = [player]
         this.player = player;
         this.bounds = bounds;
+        this.debugmode = 1;
         //createCanvas(400, 400);
     }
     // singleton instance
@@ -33,8 +34,15 @@ class Game {
             var pos = this.entities[i].getPos();
             var col = this.entities[i].getCollider();
             if (this.entities[i].getImage() != null) {
-                if (this.entities[i].getCollider().getType() == "circle") image(this.entities[i].getImage(),pos.x,pos.y,col.get(),col.getRadius())
-                else if (this.entities[i].getCollider().getType() == "box")image(this.entities[i].getImage(),pos.x,pos.y,col.getHeight(),col.getWidth())
+                if (this.entities[i].getCollider().getType() == "circle") {
+                    let rad = col.getRadius()
+                    image(this.entities[i].getImage(),pos.x - rad/2,pos.y - rad/2,rad,rad)
+                    if (this.debugmode) circle(pos.x,pos.y,col.getRadius())
+                }
+                else if (this.entities[i].getCollider().getType() == "box") {
+                    image(this.entities[i].getImage(),pos.x,pos.y,col.getHeight(),col.getWidth())
+                    if (this.debugmode) rect(pos.x,pos.y,col.getHeight(),col.getWidth())
+                }
             }
         }
     }
@@ -62,6 +70,8 @@ class Game {
             }
         }
     }
+    // getters
+    getDebugmode() {return this.debugmode}
 }
 /* 
 liam TODO

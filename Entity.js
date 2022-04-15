@@ -1,13 +1,12 @@
 class Entity {
 
-    constructor(pos,velocity, tag, radius,collider_type) {
+    constructor(pos,velocity, tag, collider_type, dimensions) {
         this.pos = pos; // float tuple 
         this.velocity = velocity; // float tuple
         this.tag = tag; // string
-        this.radius = radius; // float
         this.img = null
-        if (collider_type == "circle") this.collider = new CircleCollider(pos,this.radius);
-        if (collider_type ==  "box") this.collider = new BoxCollider(pos, this.radius, this.radius);
+        if (collider_type == "circle") this.collider = new CircleCollider(pos,dimensions.x);
+        if (collider_type ==  "box") this.collider = new BoxCollider(pos, dimensions.x, dimensions.y);
     }
     // action on collision, other is the entity that is collided with
     // both entities have this function called on a collision
