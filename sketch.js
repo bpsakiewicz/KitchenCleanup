@@ -21,10 +21,10 @@ function setup() {
 }
 
 function draw() {
+  console.log("drawing")
   background(100,100,130);
   var time = millis();
   var dt = (time - timelastcalled) / 1000;
-  image(img,0,0)
   fill(color(0,0,0))
   g.draw();
   g.update(dt);
