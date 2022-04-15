@@ -32,10 +32,10 @@ class Player extends Entity{
     playerInput(){
         //takes player input from WASD and adjusts velocity
         let dir = new p5.Vector(0,0,0);
-        if (keyIsDown(65)) dir.x = -5;
-        if (keyIsDown(68)) dir.x = 5;
-        if (keyIsDown(87)) dir.y = -5;
-        if (keyIsDown(83)) dir.y = 5;
+        if (keyIsDown(65) || keyIsDown(37)) dir.x = -5;
+        if (keyIsDown(68) || keyIsDown(39)) dir.x = 5;
+        if (keyIsDown(87) || keyIsDown(38)) dir.y = -5;
+        if (keyIsDown(83) || keyIsDown(40)) dir.y = 5;
         this.velocity.x = (dir.x)
         this.velocity.y = (dir.y)
     }
