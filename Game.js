@@ -31,6 +31,7 @@ class Game {
     draw() {
         for (var i = 0; i < this.entities.length; i++) {
             var pos = this.entities[i].getPos();
+            //if (this.entities[i].getTag() == 'player') image(this.entities[i].getImage(),pos.x,pos.y)
             if (this.entities[i].getCollider().getType() == "circle") circle(pos.x, pos.y, this.entities[i].getRadius() * 2)
             else if (this.entities[i].getCollider().getType() == "box") rect(pos.x, pos.y, this.entities[i].getCollider().getWidth(), this.entities[i].getCollider().getHeight())
         }

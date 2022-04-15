@@ -5,6 +5,7 @@ class Entity {
         this.velocity = velocity; // float tuple
         this.tag = tag; // string
         this.radius = radius; // float
+        this.img = 0
         if (collider_type == "circle") this.collider = new CircleCollider(pos,this.radius);
         if (collider_type ==  "box") this.collider = new BoxCollider(pos, this.radius, this.radius);
     }
@@ -32,7 +33,9 @@ class Entity {
     getTag(){return this.tag}
     getRadius(){return this.radius}
     getCollider(){return this.collider}
+    getImage(){return this.img}
     // setters
     setPos(pos){this.pos = pos} // AVOID SETTING POSITION ONLY USED IN GAME CLASS
+    setImage(img){this.img = img}
 
 }
