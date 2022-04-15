@@ -7,7 +7,7 @@ var timelastcalled;
 let img;
 function preload() {
   if (LOAD_IMAGES) {
-    img = loadImage("assets/classic_cook.png");
+    img = loadImage("assets/sprites/classic_cook.png");
   }
 }
 
