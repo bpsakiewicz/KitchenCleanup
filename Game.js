@@ -36,8 +36,8 @@ class Game {
             if (this.entities[i].getImage() != null) {
                 if (this.entities[i].getCollider().getType() == "circle") {
                     let rad = col.getRadius()
-                    image(this.entities[i].getImage(),pos.x - rad/2,pos.y - rad/2,rad,rad)
-                    if (this.debugmode) circle(pos.x,pos.y,col.getRadius())
+                    image(this.entities[i].getImage(),pos.x - rad,pos.y - rad,rad*2,rad*2)
+                    if (this.debugmode) circle(pos.x,pos.y,col.getRadius()*2)
                 }
                 else if (this.entities[i].getCollider().getType() == "box") {
                     image(this.entities[i].getImage(),pos.x,pos.y,col.getHeight(),col.getWidth())
