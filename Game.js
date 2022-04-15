@@ -32,10 +32,9 @@ class Game {
         for (var i = 0; i < this.entities.length; i++) {
             var pos = this.entities[i].getPos();
             var col = this.entities[i].getCollider();
-            if (this.entities[i].getImage() != null) image(this.entities[i].getImage(),pos.x,pos.y,col.getHeight(),col.getWidth())
-            else {
-                if (this.entities[i].getCollider().getType() == "circle") circle(pos.x, pos.y, this.entities[i].getRadius() * 2)
-                else if (this.entities[i].getCollider().getType() == "box") rect(pos.x, pos.y, this.entities[i].getCollider().getWidth(), this.entities[i].getCollider().getHeight())
+            if (this.entities[i].getImage() != null) {
+                if (this.entities[i].getCollider().getType() == "circle") image(this.entities[i].getImage(),pos.x,pos.y,col.get(),col.getRadius())
+                else if (this.entities[i].getCollider().getType() == "box")image(this.entities[i].getImage(),pos.x,pos.y,col.getHeight(),col.getWidth())
             }
         }
     }

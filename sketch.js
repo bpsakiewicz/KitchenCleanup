@@ -20,6 +20,7 @@ function setup() {
   timelastcalled = millis();
   g.instantiate(TESTBUMPER);
   g.instantiate(TESTBUMPER1);
+  noSmooth()
 }
 
 function draw() {
