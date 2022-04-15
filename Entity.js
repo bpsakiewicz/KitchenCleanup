@@ -36,6 +36,7 @@ class Entity {
     getImage(){return this.img}
     // setters
     setPos(pos){this.pos = pos} // AVOID SETTING POSITION ONLY USED IN GAME CLASS
-    setImage(img){this.img = img}
+    setImage(img){this.img = img
+    console.log(this.img != null)}
 
 }
