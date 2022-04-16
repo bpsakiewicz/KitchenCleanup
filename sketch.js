@@ -12,6 +12,7 @@ function preload() {
     classicCook = loadImage("assets/sprites/classic_cook.png");
     garlic = loadImage("assets/sprites/ghostly_garlic.png");
     tomato = loadImage("assets/sprites/twisted_tomato.png");
+    coolCook = loadImage("assets/sprites/cool_cook.png")
   }
 }
 
