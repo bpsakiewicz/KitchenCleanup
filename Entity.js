@@ -7,6 +7,7 @@ class Entity {
         this.img = null
         if (collider_type == "circle") this.collider = new CircleCollider(pos,dimensions.x / 2);
         if (collider_type ==  "box") this.collider = new BoxCollider(pos, dimensions.x, dimensions.y);
+        this.spritestate = null;
     }
     // action on collision, other is the entity that is collided with
     // both entities have this function called on a collision
@@ -35,7 +36,8 @@ class Entity {
     getImage(){return this.img}
     // setters
     setPos(pos){this.pos = pos} // AVOID SETTING POSITION ONLY USED IN GAME CLASS
-    setImage(img){this.img = img
-    console.log(this.img != null)}
+    setImage(img){this.img = img}
+    setSpriteState(sprite_list) {this.spritestate = new SpriteState(sprite_list)}
+
 
 }
