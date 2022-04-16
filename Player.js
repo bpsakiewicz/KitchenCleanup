@@ -26,7 +26,7 @@ class Player extends Entity{
         this.playerInput();
         this.pos.x += this.velocity.x;
         this.pos.y += this.velocity.y;
-        console.log(this.getPos());
+        //console.log(this.getPos());
         //console.log(this.getVelocity());
     }
 

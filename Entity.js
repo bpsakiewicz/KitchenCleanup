@@ -24,7 +24,7 @@ class Entity {
     // deltaTime is the change in time between updates, only really necessary if you want to measure the time passed since an event
         // like bullet lifetimes, timing of enemy behavior etc 
     update(deltaTime) {
-
+        this.startstate.update(deltaTime)
     }
 
     // getters
@@ -33,12 +33,12 @@ class Entity {
     getTag(){return this.tag}
     getRadius(){return this.radius}
     getCollider(){return this.collider}
-    getImage(){return this.img}
+    getImage(){return this.spritestate.getSprite()}
     // setters
     setPos(pos){this.pos = pos} // AVOID SETTING POSITION ONLY USED IN GAME CLASS
     setImage(img){
-        this.img = img
-        this.spritestate = new SpriteState([img])
+        this.img = img;
+        this.spritestate = new SpriteState([img]);
     }
     setSpriteState(sprite_list) {this.spritestate = new SpriteState(sprite_list)}
 
