@@ -7,7 +7,7 @@ class SpriteState {
         this.active = 0; // bool for active
         this.counter = 0; // counts updates
         // states are the "animations" currently being states, "walking" state etc
-        states = ["default"]
+        this.states = ["default"]
     }
     update(deltaTime) {
         // change sprite if needed
