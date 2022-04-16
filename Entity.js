@@ -27,10 +27,9 @@ class Entity {
     }
 
     // getters
-    getPos(){return this.pos}
+    getPos(){return this.pos} // if its a circle, pos is the center, if its a box, pos is top-left
     getVelocity(){return this.velocity}
     getTag(){return this.tag}
-    getRadius(){return this.radius}
     getCollider(){return this.collider}
     getImage(){return this.img}
     // setters
