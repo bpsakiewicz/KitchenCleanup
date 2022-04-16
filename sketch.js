@@ -6,15 +6,6 @@ var timelastcalled;
 var player;
 var g;
 function preload() {
-  player = new Player("Knive","Bandana")
-  g = new Game(player,new p5.Vector(1175,775));
-
-  if (LOAD_IMAGES) {
-    player.setImage(loadImage("assets/sprites/classic_cook.png"))
-    //classicCook = loadImage("assets/sprites/classic_cook.png"); this is the player
-    //garlic = loadImage("assets/sprites/garlic/garlic0.png");
-    //tomato = loadImage("assets/sprites/tomato/tomato1.png");
-  }
 }
 
 function setup() {
@@ -23,6 +14,14 @@ function setup() {
   timelastcalled = millis();
   // g.instantiate(TESTBUMPER);
   // g.instantiate(TESTBUMPER1);
+  player = new Player("Knive","Bandana")
+  g = new Game(player,new p5.Vector(1175,775));
+  if (LOAD_IMAGES) {
+    player.setImage(loadImage("assets/sprites/classic_cook.png"))
+    classicCook = loadImage("assets/sprites/classic_cook.png"); //this is the player
+    garlic = loadImage("assets/sprites/garlic/garlic0.png");
+    tomato = loadImage("assets/sprites/tomato/tomato1.png");
+  }
   noSmooth()
   console.log(g)
 }

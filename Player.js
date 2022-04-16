@@ -10,6 +10,7 @@ class Player extends Entity{
         this.alive = true;
         this.weapon = weapon;
         this.armor = armor;
+        //asdwasdwthis.setImage(coolCook)
         //this.health = armor.health;
         //this.ability = null; //implement abilitys??
 
