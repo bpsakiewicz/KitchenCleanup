@@ -5,7 +5,13 @@ var LOAD_IMAGES = 1
 var timelastcalled;
 var player;
 var g;
+var tomato;
+var garlic;
+var tomato;
 function preload() {
+  classicCook = loadImage("assets/sprites/classic_cook.png"); //this is the player
+  garlic = loadImage("assets/sprites/garlic/garlic1.png");
+  tomato = loadImage("assets/sprites/tomato/tomato1.png");
 }
 
 function setup() {
@@ -18,9 +24,6 @@ function setup() {
   g = new Game(player,new p5.Vector(1175,775));
   if (LOAD_IMAGES) {
     player.setImage(loadImage("assets/sprites/classic_cook.png"))
-    classicCook = loadImage("assets/sprites/classic_cook.png"); //this is the player
-    garlic = loadImage("assets/sprites/garlic/garlic0.png");
-    tomato = loadImage("assets/sprites/tomato/tomato1.png");
   }
   noSmooth()
   console.log(g)
