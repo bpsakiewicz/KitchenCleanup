@@ -8,7 +8,6 @@ class Enemy extends Entity{
     onCollision(other) {
         // TEMPORARY EXAMPLE
         // checks to see if i collided with the player, and kills itself if so
-        console.log("colliding with " + other.getTag());
         var tag = other.getTag()
         if (tag == "player") {
             Game.getInstance().destroy(this);

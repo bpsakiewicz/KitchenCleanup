@@ -24,4 +24,5 @@ class SpriteState {
     getSprite() {return this.sprites[this.frame]}
     // setters
     setActive() {return this.active}
+    setPeriod(p) {this.period = p}
 }

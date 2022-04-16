@@ -13,6 +13,11 @@ class Player extends Entity{
         //asdwasdwthis.setImage(coolCook)
         //this.health = armor.health;
         //this.ability = null; //implement abilitys??
+        // sprite state
+        this.idlestate = new SpriteState([loadImage("assets/sprites/cook/cookidle0.png"),loadImage("assets/sprites/cook/cookidle1.png"),loadImage("assets/sprites/cook/cookidle2.png")])
+        this.walkstate = new SpriteState([loadImage("assets/sprites/cook/cookwalk0.png"),loadImage("assets/sprites/cook/cookwalk1.png"),loadImage("assets/sprites/cook/cookwalk2.png")])
+        this.walkstate.setPeriod(5);
+        this.spritestate = this.idlestate;
 
     }
     //SINGLETON
@@ -21,6 +26,13 @@ class Player extends Entity{
     }
 
     update(){
+        // updates sprite
+        if (this.spritestate == null) throw new Error("nro what");
+        this.spritestate.update(deltaTime);
+        // if velocity isnt 0 set state to walk
+        if (this.velocity.x != 0 || this.velocity.y != 0) this.spritestate = this.walkstate;
+        else this.spritestate = this.idlestate;
+
         //adjusts position to velocity of player
         this.checkBoundaries();
         this.playerInput();

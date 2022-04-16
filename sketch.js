@@ -23,7 +23,7 @@ function setup() {
   player = new Player("Knive","Bandana")
   g = new Game(player,new p5.Vector(1175,775));
   if (LOAD_IMAGES) {
-    player.setImage(loadImage("assets/sprites/classic_cook.png"))
+    //player.setImage(loadImage("assets/sprites/classic_cook.png"))
   }
   noSmooth()
   console.log(g)
