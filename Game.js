@@ -10,6 +10,10 @@ class Game {
         this.player = player;
         this.bounds = bounds;
         this.debugmode = 1;
+        this.level = new Level(1);
+        for(const enemy in this.level.enemies) {
+            this.instantiate(this.level.enemies[enemy])
+        }
         //createCanvas(400, 400);
     }
     // singleton instance
