@@ -18,6 +18,16 @@ class Entity {
     // deltaTime is the change in time between updates, only really necessary if you want to measure the time passed since an event
         // like bullet lifetimes, timing of enemy behavior etc 
     update(deltaTime) {
+        if (this.tag == "gun") {
+            var playa = Player.getInstance();
+            var ppos = playa.getPos();
+            this.pos.x = ppos.x;
+            this.pos.y = ppos.y;
+            if (true) {
+                this.spritestate.setActive(true);
+            }
+            //if ( this.spritestate != null) this.startstate.update(deltaTime)
+        }
         //this.startstate.update(deltaTime)
     }
 

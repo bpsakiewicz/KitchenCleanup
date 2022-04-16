@@ -80,10 +80,8 @@ class Game {
     getDebugmode() {return this.debugmode}
 }
 /* 
-liam TODO
-entity.radius ins TEMPORARY
-room loading
-give collision angle with OnCollision
-loading pictures
-start menu as room/floor
+IDEAAAAA
+aim with wasd, i to shoot
+shift to walk really really slow so you can aim
+give enemies lots of heath and high rate of fire!!!!!!
 */

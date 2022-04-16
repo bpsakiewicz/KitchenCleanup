@@ -4,13 +4,16 @@ class SpriteState {
         this.period = 15;
         this.sprites = sprites;
         this.frame = 0; // index in sprites
-        this.active = 0; // bool for active
+        this.active = true; // bool for active
+        this.repeat = true;
         this.counter = 0; // counts updates
         // states are the "animations" currently being states, "walking" state etc
         this.states = ["default"]
+        this.flipped = 0;
     }
     update(deltaTime) {
-        // change sprite if needed
+        if (this.active) {
+            // change sprite if needed
         if (this.counter > this.period) {
             this.counter = 0;
             // circle back if needed
@@ -19,10 +22,11 @@ class SpriteState {
         }
         // also want like transfornations
         this.counter++;
+        }
     }
     // getters
     getSprite() {return this.sprites[this.frame]}
     // setters
-    setActive() {return this.active}
+    setRepeat(r) {this.repeat = r}
     setPeriod(p) {this.period = p}
 }

@@ -1,5 +1,4 @@
 var LOAD_IMAGES = 1
-//var player = new Entity(new p5.Vector(50,400), new p5.Vector(400,0), "player", 40,"box");
 //var player = new Player("Knive","Bandana")
 //var g = new Game(player,new p5.Vector(1175,775));
 var timelastcalled;

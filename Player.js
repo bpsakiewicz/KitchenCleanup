@@ -4,7 +4,7 @@ class Player extends Entity{
         if(Player.instance){
             throw new Error("Player already made!");
         }
-        super(new p5.Vector(50,400), new p5.Vector(0,0), "player", "box", new p5.Vector(60,60));
+        super(new p5.Vector(50,400), new p5.Vector(0,0), "player", "box", new p5.Vector(80,80));
         Player.instance = this;
         //creates default player    
         this.alive = true;
@@ -16,7 +16,10 @@ class Player extends Entity{
         // sprite state
         this.idlestate = new SpriteState([loadImage("assets/sprites/cook/cookidle0.png"),loadImage("assets/sprites/cook/cookidle1.png"),loadImage("assets/sprites/cook/cookidle2.png")])
         this.walkstate = new SpriteState([loadImage("assets/sprites/cook/cookwalk0.png"),loadImage("assets/sprites/cook/cookwalk1.png"),loadImage("assets/sprites/cook/cookwalk2.png")])
+        this.shootstate =  new SpriteState([loadImage("assets/sprites/shooter/shooter0.png"),loadImage("assets/sprites/shooter/shooter1.png"),loadImage("assets/sprites/shooter/shooter2.png"),loadImage("assets/sprites/shooter/shooter3.png")])
         this.walkstate.setPeriod(5);
+        this.shootstate.setPeriod(1);
+        this.shootFrames = 0;
         this.spritestate = this.idlestate;
 
     }
@@ -26,13 +29,6 @@ class Player extends Entity{
     }
 
     update(){
-        // updates sprite
-        if (this.spritestate == null) throw new Error("nro what");
-        this.spritestate.update(deltaTime);
-        // if velocity isnt 0 set state to walk
-        if (this.velocity.x != 0 || this.velocity.y != 0) this.spritestate = this.walkstate;
-        else this.spritestate = this.idlestate;
-
         //adjusts position to velocity of player
         this.checkBoundaries();
         this.playerInput();
@@ -40,6 +36,20 @@ class Player extends Entity{
         this.pos.y += this.velocity.y;
         //console.log(this.getPos());
         //console.log(this.getVelocity());
+
+        // updates sprite
+        if (this.spritestate == null) throw new Error("nro what");
+        this.spritestate.update(deltaTime);
+        // if velocity isnt 0 set state to walk
+        if (this.shootFrames == 0) {
+            if (this.velocity.x != 0 || this.velocity.y != 0) this.spritestate = this.walkstate;
+        else this.spritestate = this.idlestate;
+        } else {
+            this.shootFrames++;
+            if (this.shootFrames > 4) {
+                this.shootFrames = 0;
+            }
+        }
     }
 
     playerInput(){
@@ -47,7 +57,7 @@ class Player extends Entity{
         document.body.onclick = function() {
             //console.log("plz")
             //console.log(player);
-            var bullet = new Projectile(new p5.Vector(player.pos.x + 80,player.pos.y+20), new p5.Vector(1000,0));
+            var bullet = new Projectile(new p5.Vector(player.pos.x + 80,player.pos.y+40), new p5.Vector(1000,0));
             console.log(bullet);
             g.instantiate(bullet);
         }
@@ -57,6 +67,15 @@ class Player extends Entity{
         if (keyIsDown(68) || keyIsDown(39)) dir.x = 5;
         if (keyIsDown(87) || keyIsDown(38)) dir.y = -5;
         if (keyIsDown(83) || keyIsDown(40)) dir.y = 5;
+        if (keyIsDown(73)) {
+            // shooting bullet
+            var bullet = new Projectile(new p5.Vector(player.pos.x + 80,player.pos.y+40), new p5.Vector(1000,0));
+            console.log(bullet);
+            g.instantiate(bullet);
+            // shooting animation
+            this.spritestate = this.shootstate;
+            this.shootFrames = 1;
+        }
         this.velocity.x = (dir.x)
         this.velocity.y = (dir.y)
     }
