@@ -9,8 +9,8 @@ var timelastcalled;
 function preload() {
   if (LOAD_IMAGES) {
     player.setImage(loadImage("assets/sprites/classic_cook.png"))
-    TESTBUMPER.setImage(loadImage("assets/sprites/ghostly_garlic.png"))
-    TESTBUMPER1.setImage(loadImage("assets/sprites/twisted_tomato.png"))
+    TESTBUMPER.setImage(loadImage("assets/sprites/garlic/garlic0.png"))
+    TESTBUMPER1.setImage(loadImage("assets/sprites/tomato/tomato0.png"))
   }
 }
 
