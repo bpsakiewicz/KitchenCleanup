@@ -26,12 +26,19 @@ class Player extends Entity{
         this.playerInput();
         this.pos.x += this.velocity.x;
         this.pos.y += this.velocity.y;
-        console.log(this.getPos());
+        //console.log(this.getPos());
         //console.log(this.getVelocity());
     }
 
     playerInput(){
         //takes player input from WASD and adjusts velocity
+        document.body.onclick = function() {
+            console.log("plz")
+            console.log(player);
+            var bullet = new Projectile(new p5.Vector(player.pos.x + 80,player.pos.y+20), new p5.Vector(1000,0));
+            g.instantiate(bullet);
+        }
+        
         let dir = new p5.Vector(0,0,0);
         if (keyIsDown(65) || keyIsDown(37)) dir.x = -5;
         if (keyIsDown(68) || keyIsDown(39)) dir.x = 5;
