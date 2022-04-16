@@ -3,7 +3,7 @@ class SpriteState {
     constructor(sprites) {
         this.period = 20;
         this.sprites = sprites;
-        this.image = sprites[0];
+        this.img = sprites[0];
         this.active = 0;
     }
     update(deltaTime) {
@@ -11,7 +11,7 @@ class SpriteState {
         // also want like transfornations
     }
     // getters
-    getImage() {return this.image}
+    getImg() {return this.img}
     // setters
     setActive() {return this.active}
 }
