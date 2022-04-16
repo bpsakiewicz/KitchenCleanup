@@ -23,6 +23,8 @@ class Game {
 
     // instantiate a new entity to be simulated
     instantiate(entity) {
+        // cant push null entity
+        if (entity == null) throw new Error("entity instantiated is null!")
         this.entities.push(entity);
     }
     // remove an entity from the game
@@ -65,11 +67,11 @@ class Game {
             // collide entities
             for (var j = i+1; j < this.entities.length; j++) {
                 //console.log(i,j);
-                //if (entity == this.entities[j]) continue;
+                if (entity.getTag() == this.entities[j].getTag()) continue; // temporary?????
                 //console.log(this.entities[i].getCollider());
                 if (entity.getCollider().checkCollision(this.entities[j].getCollider())) {
                     entity.onCollision(this.entities[j]);
-                    this.entities[j].onCollision(entity);
+                    if (this.entities[j] != null) this.entities[j].onCollision(entity);
                 }
             }
         }

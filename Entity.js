@@ -12,19 +12,13 @@ class Entity {
     // action on collision, other is the entity that is collided with
     // both entities have this function called on a collision
     onCollision(other) {
-        // TEMPORARY EXAMPLE
-        // checks to see if i collided with the player, and kills itself if so
-        var tag = other.getTag()
-        if (tag == "player") {
-            Game.getInstance().destroy(this);
-        }
     }
     // updates that take place every frame
     // this is where you would update the entities velocity for example, or outline its behavior
     // deltaTime is the change in time between updates, only really necessary if you want to measure the time passed since an event
         // like bullet lifetimes, timing of enemy behavior etc 
     update(deltaTime) {
-        this.startstate.update(deltaTime)
+        //this.startstate.update(deltaTime)
     }
 
     // getters

@@ -5,6 +5,16 @@ class Enemy extends Entity{
         this.setSpriteState([loadImage("assets/sprites/tomato/tomato0.png"),loadImage("assets/sprites/tomato/tomato1.png")])
     }
 
+    onCollision(other) {
+        // TEMPORARY EXAMPLE
+        // checks to see if i collided with the player, and kills itself if so
+        console.log("colliding with " + other.getTag());
+        var tag = other.getTag()
+        if (tag == "player") {
+            Game.getInstance().destroy(this);
+        }
+    }
+
     update(deltaTime) {
         // console.log(this)
         //if (this.startstate == null) this.setSpriteState([loadImage("assets/sprites/tomato/tomato0.png"),loadImage("assets/sprites/tomato/tomato1.png")])
