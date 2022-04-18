@@ -1,6 +1,8 @@
 class Level {
 
     constructor(levelNum) {
+        this.player = Player.getInstance();
+        console.log(this.player);
         this.rooms = this.generateRooms(levelNum);
         this.currentRoom = this.rooms[0];
         this.enemies = [];

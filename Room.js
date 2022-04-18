@@ -1,23 +1,24 @@
 class Room {
 
-    constructor(levelNum, xCoor, yCoor) {
+    constructor(levelNum, xCoor, yCoor, player) {
         this.x = xCoor;
         this.y = yCoor;
         this.size = (width, height); 
         this.enemies = this.generateEnemies(levelNum);
         this.obstacles = [];
+        this.levelNum = levelNum;
     }
 
     generateEnemies(levelNum) {
         const enemies = [];
 
         // ADD NEW ENEMY TYPES TO THIS ARRAY
-        var enemyTypes = [p5.Vector("tomato", "circle"), p5.Vector("garlic", "circle")];
+        var enemyTypes = [["tomato", "circle"], ["garlic", "circle"]];
 
-        console.log(random(enemyTypes))
-        console.log("hello")
+        // console.log(enemyTypes)
+        // console.log("hello")
         for(let i = 0;  i < levelNum + sqrt(levelNum); i++) {
-            enemies[i] = new Enemy(random(enemyTypes));
+            enemies[i] = new Enemy(random(enemyTypes), this.levelNum);
         }
 
         return enemies;
