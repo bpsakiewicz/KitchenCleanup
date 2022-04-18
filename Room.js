@@ -7,7 +7,6 @@ class Room {
         this.enemies = this.generateEnemies(levelNum);
         this.obstacles = [];
         this.levelNum = levelNum;
-        // console.log(this.levelNum)
     }
 
     generateEnemies(levelNum) {
@@ -15,11 +14,10 @@ class Room {
 
         // ADD NEW ENEMY TYPES TO THIS ARRAY
         var enemyTypes = [["tomato", "circle"], ["garlic", "circle"]];
-
-        for(let i = 0;  i < levelNum + sqrt(levelNum); i++) {
+        console.log(random(levelNum, levelNum + sqrt(levelNum)))
+        for(let i = 0;  i < random(levelNum, levelNum + sqrt(levelNum)); i++) {
             enemies[i] = new Enemy(random(enemyTypes), levelNum);
         }
-        // console.log(levelNum + "rooms")
         return enemies;
     }
 
