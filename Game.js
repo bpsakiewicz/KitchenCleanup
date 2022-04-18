@@ -11,8 +11,8 @@ class Game {
         this.bounds = bounds;
         this.debugmode = 0;
         this.level = new Level(1);
-        for(const enemy in this.level.enemies) {
-            this.instantiate(this.level.enemies[enemy])
+        for(const enemy in this.level.currentRoom.enemies) {
+            this.instantiate(this.level.currentRoom.enemies[enemy])
         }
         //createCanvas(400, 400);
     }
@@ -36,17 +36,23 @@ class Game {
     }
     // simulation
     draw() {
+        textSize(32);
+        textFont('ArcadeClassic');
+        fill(color(250, 230, 215));
+        text("Level: " + this.level.levelNum, 10, 30);
+        text("Room: " + (this.level.rooms.indexOf(this.level.currentRoom) + 1), 10, 60);
         for (var i = 0; i < this.entities.length; i++) {
-            var pos = this.entities[i].getPos();
-            var col = this.entities[i].getCollider();
-            if (this.entities[i].getImage() != null) {
-                if (this.entities[i].getCollider().getType() == "circle") {
+            var entity = this.entities[i];
+            var pos = entity.getPos();
+            var col = entity.getCollider();
+            if (entity.getImage() != null) {
+                if (entity.getCollider().getType() == "circle") {
                     let rad = col.getRadius()
-                    image(this.entities[i].getImage(),pos.x - rad,pos.y - rad,rad*2,rad*2)
+                    image(entity.getImage(),pos.x - rad,pos.y - rad,rad*2,rad*2)
                     if (this.debugmode) circle(pos.x,pos.y,col.getRadius()*2)
                 }
-                else if (this.entities[i].getCollider().getType() == "box") {
-                    image(this.entities[i].getImage(),pos.x,pos.y,col.getHeight(),col.getWidth())
+                else if (entity.getCollider().getType() == "box") {
+                    image(entity.getImage(),pos.x,pos.y,col.getHeight(),col.getWidth())
                     if (this.debugmode) rect(pos.x,pos.y,col.getHeight(),col.getWidth())
                 }
             }
@@ -55,10 +61,14 @@ class Game {
 
     // update entities and check collisions
     update(deltaTime) {
+        this.level.update(deltaTime);
         for (var i = 0; i < this.entities.length; i++) {
             var entity = this.entities[i];
-            // update the entity
-            entity.update(deltaTime);
+            if(entity.getTag() == "player") {
+                // update the entity
+                entity.update(deltaTime);
+            }
+
             // update position
             if (entity.pos.x < this.bounds.x)
                 entity.pos.x += entity.velocity.x * deltaTime;
