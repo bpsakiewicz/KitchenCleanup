@@ -1,5 +1,5 @@
 class Enemy extends Entity{
-    constructor(enemyType) {
+    constructor(enemyType, levelNum) {
         // console.log(enemyType)
         super(new p5.Vector(random(100, width - 100), random(100, height - 100)), new p5.Vector(0, 0), enemyType[0] + "_enemy", enemyType[1], new p5.Vector(100, 100));
         switch(enemyType[0]) {
@@ -14,6 +14,7 @@ class Enemy extends Entity{
             default:
                 break;
         }
+        this.levelNum = levelNum;
         // this.setImage(tomato)
         // this.setSpriteState([loadImage("assets/sprites/tomato/tomato0.png"),loadImage("assets/sprites/tomato/tomato1.png")])
     }

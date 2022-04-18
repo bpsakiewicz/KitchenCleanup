@@ -15,8 +15,6 @@ class Room {
         // ADD NEW ENEMY TYPES TO THIS ARRAY
         var enemyTypes = [["tomato", "circle"], ["garlic", "circle"]];
 
-        // console.log(enemyTypes)
-        // console.log("hello")
         for(let i = 0;  i < levelNum + sqrt(levelNum); i++) {
             enemies[i] = new Enemy(random(enemyTypes), this.levelNum);
         }
