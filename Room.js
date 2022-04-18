@@ -1,12 +1,13 @@
 class Room {
 
-    constructor(levelNum, xCoor, yCoor, player) {
+    constructor(levelNum, xCoor, yCoor) {
         this.x = xCoor;
         this.y = yCoor;
         this.size = (width, height); 
         this.enemies = this.generateEnemies(levelNum);
         this.obstacles = [];
         this.levelNum = levelNum;
+        // console.log(this.levelNum)
     }
 
     generateEnemies(levelNum) {
@@ -16,9 +17,9 @@ class Room {
         var enemyTypes = [["tomato", "circle"], ["garlic", "circle"]];
 
         for(let i = 0;  i < levelNum + sqrt(levelNum); i++) {
-            enemies[i] = new Enemy(random(enemyTypes), this.levelNum);
+            enemies[i] = new Enemy(random(enemyTypes), levelNum);
         }
-
+        // console.log(levelNum + "rooms")
         return enemies;
     }
 
