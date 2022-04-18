@@ -10,7 +10,7 @@ class Game {
         this.player = player;
         this.bounds = bounds;
         this.debugmode = 0;
-        this.level = new Level(5);
+        this.level = new Level(2);
         for(const enemy in this.level.currentRoom.enemies) {
             this.instantiate(this.level.currentRoom.enemies[enemy])
         }
@@ -56,9 +56,10 @@ class Game {
 
     // update entities and check collisions
     update(deltaTime) {
+        this.level.update(deltaTime);
         for (var i = 0; i < this.entities.length; i++) {
             var entity = this.entities[i];
-            if(entity.getTag() == "player" || this.level.currentRoom.enemies.includes(entity)) {
+            if(entity.getTag() == "player") {
                 // update the entity
                 entity.update(deltaTime);
             }

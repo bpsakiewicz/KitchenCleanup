@@ -37,7 +37,7 @@ class Level {
         return rooms;
     }
 
-    update() {
-        this.currentRoom.update();
+    update(deltaTime) {
+        this.currentRoom.update(deltaTime);
     }
 }

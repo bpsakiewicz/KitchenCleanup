@@ -14,16 +14,15 @@ class Room {
 
         // ADD NEW ENEMY TYPES TO THIS ARRAY
         var enemyTypes = [["tomato", "circle"], ["garlic", "circle"]];
-        console.log(random(levelNum, levelNum + sqrt(levelNum)))
         for(let i = 0;  i < random(levelNum, levelNum + sqrt(levelNum)); i++) {
             enemies[i] = new Enemy(random(enemyTypes), levelNum);
         }
         return enemies;
     }
 
-    update() {
+    update(deltaTime) {
         for(const enemy in this.enemies) {
-            this.enemies[enemy].update();
+            this.enemies[enemy].update(deltaTime);
         }
     }
 }
