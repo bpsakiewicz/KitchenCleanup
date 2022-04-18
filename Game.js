@@ -38,6 +38,7 @@ class Game {
     draw() {
         textSize(32);
         textFont('ArcadeClassic');
+        fill(color(250, 230, 215));
         text("Level: " + this.level.levelNum, 10, 30);
         text("Room: " + (this.level.rooms.indexOf(this.level.currentRoom) + 1), 10, 60);
         for (var i = 0; i < this.entities.length; i++) {
