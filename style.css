@@ -1,8 +1,14 @@
+@font-face {
+  font-family: 'ArcadeClassic', sans-serif;                 
+  src: url("http://fonts.cdnfonts.com/css/arcade-classic");
+}
+
 html, body {
   margin: 0;
   padding: 0;
   text-align: center;
   background-color: black;
+  font-family: 'ArcadeClassic';
 }
 
 canvas {

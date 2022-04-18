@@ -10,7 +10,7 @@ class Game {
         this.player = player;
         this.bounds = bounds;
         this.debugmode = 0;
-        this.level = new Level(2);
+        this.level = new Level(1);
         for(const enemy in this.level.currentRoom.enemies) {
             this.instantiate(this.level.currentRoom.enemies[enemy])
         }
@@ -36,6 +36,10 @@ class Game {
     }
     // simulation
     draw() {
+        textSize(32);
+        textFont('ArcadeClassic');
+        text("Level: " + this.level.levelNum, 10, 30);
+        text("Room: " + (this.level.rooms.indexOf(this.level.currentRoom) + 1), 10, 60);
         for (var i = 0; i < this.entities.length; i++) {
             var entity = this.entities[i];
             var pos = entity.getPos();
