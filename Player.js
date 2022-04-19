@@ -58,7 +58,7 @@ class Player extends Entity{
             //console.log("plz")
             //console.log(player);
             var bullet = new Projectile(new p5.Vector(player.pos.x + 80,player.pos.y+40), new p5.Vector(1000,0));
-            console.log(bullet);
+            // console.log(bullet);
             g.instantiate(bullet);
         }
         
@@ -86,8 +86,8 @@ class Player extends Entity{
             this.vel.y = 0;
         }*/
         if(this.pos.x < 0) this.pos.x += 5.5;
-        if(this.pos.x > 1180) this.pos.x -=5.5;
+        if(this.pos.x + this.dimensions.x > width) this.pos.x -=5.5;
         if(this.pos.y < 0) this.pos.y += 5.5;
-        if(this.pos.y > 780) this.pos.y -=5.5;
+        if(this.pos.y + this.dimensions.y > height) this.pos.y -=5.5;
     }
 }

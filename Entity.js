@@ -8,6 +8,7 @@ class Entity {
         if (collider_type == "circle") this.collider = new CircleCollider(pos,dimensions.x / 2);
         if (collider_type ==  "box") this.collider = new BoxCollider(pos, dimensions.x, dimensions.y);
         this.spritestate = null;
+        this.dimensions = dimensions;
     }
     // action on collision, other is the entity that is collided with
     // both entities have this function called on a collision

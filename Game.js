@@ -21,7 +21,7 @@ class Game {
         return Game.instance;
     }
 
-    // instantiate a new entity to be simulated
+    // instantiate a new entit y to be simulated
     instantiate(entity) {
         // cant push null entity
         if (entity == null) throw new Error("entity instantiated is null!")
@@ -40,7 +40,8 @@ class Game {
         textFont('ArcadeClassic');
         fill(color(250, 230, 215));
         text("Level: " + this.level.levelNum, 10, 30);
-        text("Room: " + (this.level.rooms.indexOf(this.level.currentRoom) + 1), 10, 60);
+        text("Room: " + (this.level.rooms.indexOf(this.level.currentRoom) + 1) 
+            + "/" + this.level.rooms.length, 10, 60);
         for (var i = 0; i < this.entities.length; i++) {
             var entity = this.entities[i];
             var pos = entity.getPos();

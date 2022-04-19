@@ -5,12 +5,6 @@ class Level {
         this.levelNum = levelNum;
         this.rooms = this.generateRooms();
         this.currentRoom = this.rooms[0];
-        this.enemies = [];
-        for(const room in this.rooms) {
-            for(const enemy in this.rooms[room].enemies) {
-                this.enemies.push(this.rooms[room].enemies[enemy]);
-            }
-        }
     }
 
     generateRooms() {

@@ -15,6 +15,7 @@ class Enemy extends Entity{
         }
 
         this.lNum = levelNum;
+        this.health = this.lNum * 100;
         // this.setImage(tomato)
         // this.setSpriteState([loadImage("assets/sprites/tomato/tomato0.png"),loadImage("assets/sprites/tomato/tomato1.png")])
     }
@@ -25,6 +26,13 @@ class Enemy extends Entity{
         var tag = other.getTag()
         if (tag == "player") {
             Game.getInstance().destroy(this);
+        }
+
+        if(tag == "projectile") {
+            this.takeDamage(new Projectile(other).getDamage());
+            if(this.health <= 0) {
+                Game.getInstance().destroy(this);
+            }
         }
     }
 
@@ -39,5 +47,10 @@ class Enemy extends Entity{
         this.spritestate.update(deltaTime);
         this.updateVelocity(Player.getInstance().getPos());
         //let i = deltaTime;
+    }
+
+    takeDamage(damage) {
+        this.health -= damage;
+        // console.log(this.health);
     }
 }

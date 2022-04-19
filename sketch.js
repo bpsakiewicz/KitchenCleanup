@@ -11,6 +11,7 @@ function preload() {
   classicCook = loadImage("assets/sprites/classic_cook.png"); //this is the player
   garlic = loadImage("assets/sprites/garlic/garlic1.png");
   tomato = loadImage("assets/sprites/tomato/tomato1.png");
+
 }
 
 function setup() {
