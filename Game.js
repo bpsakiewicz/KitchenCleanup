@@ -10,7 +10,7 @@ class Game {
         this.player = player;
         this.bounds = bounds;
         this.debugmode = 0;
-        this.level = new Level(3);
+        this.level = new Level(2);
         for(const enemy in this.level.currentRoom.enemies) {
             this.instantiate(this.level.currentRoom.enemies[enemy])
         }
@@ -29,9 +29,11 @@ class Game {
     }
     // remove an entity from the game
     destroy(entity) {
+
         if(entity.getTag().includes("enemy")) {
             this.level.currentRoom.destroy(entity);
         }
+
         for (var i = 0; i < this.entities.length; i++) {
             if (this.entities[i] === entity) 
                 this.entities.splice(i,1);
@@ -69,14 +71,14 @@ class Game {
                 }
             }
 
-            if(this.level.currentRoom.getExitHallway() != null) {
-                if(this.level.currentRoom.getExitHallway().checkPlayerInHallway(this.player)) {
-                    this.level.currentRoom = this.level.rooms[0];
-                    for(const enemy in this.level.currentRoom.enemies) {
-                        this.instantiate(this.level.currentRoom.enemies[enemy]);
-                    }
-                }
-            }
+            // if(this.level.currentRoom.getExitHallway() != null) {
+            //     if(this.level.currentRoom.getExitHallway().checkPlayerInHallway(this.player)) {
+            //         this.level.currentRoom = this.level.rooms[this.level.roomNum + 1];
+            //         for(const enemy in this.level.currentRoom.enemies) {
+            //             this.instantiate(this.level.currentRoom.enemies[enemy]);
+            //         }
+            //     }
+            // } 
         }
     }
     // getters

@@ -6,8 +6,7 @@ class Level {
         this.rooms = this.generateRooms();
         this.currentRoom = this.rooms[0];
         this.totalRooms = this.rooms.length;
-        this.rooms.splice(0, 1);
-        this.roomNum = 1;
+        this.roomNum = 0;
     }
 
     generateRooms() {
@@ -39,22 +38,28 @@ class Level {
     update(deltaTime) {
         this.currentRoom.update(deltaTime);
 
+        // unlock current room's exit hallway
         if(this.currentRoom.enemies.length == 0) {
-            if(this.currentRoom.getExitHallway() != null){
+            if(this.currentRoom.getExitHallway()){
                 this.currentRoom.getExitHallway().locked = false;
             }
         }
+        this.updateCurrentRoom();
+    }
 
+    updateCurrentRoom() {
+        // update the current room to be the next one
         if(this.currentRoom.getExitHallway() != null) {
             if(!this.currentRoom.getExitHallway().locked) {
                 if(this.currentRoom.getExitHallway().checkPlayerInHallway(this.player)) {
-                    console.log(this.currentRoom.getExitHallway());
-                    this.rooms.splice(0, 1);
+                    this.currentRoom = this.rooms[this.roomNum + 1];
                     this.roomNum++;
+                    for(const enemy in this.currentRoom.enemies) {
+                        Game.getInstance().instantiate(this.currentRoom.enemies[enemy])
+                    }
                 }
             }
         }
-        return null;
     }
 
     drawLevel(entities) {
@@ -64,7 +69,7 @@ class Level {
         // text("hello", width / 2, height/2)
         //tint(0,255)
         text("Level: " + this.levelNum, 10, height - 40);
-        text("Room: " + this.roomNum + "/" + this.totalRooms, 10, height - 10);
+        text("Room: " + (this.roomNum + 1) + "/" + this.totalRooms, 10, height - 10);
         this.currentRoom.drawRoom(entities);
     }
 }
