@@ -10,7 +10,7 @@ class Game {
         this.player = player;
         this.bounds = bounds;
         this.debugmode = 0;
-        this.level = new Level(1);
+        this.level = new Level(3);
         for(const enemy in this.level.currentRoom.enemies) {
             this.instantiate(this.level.currentRoom.enemies[enemy])
         }
@@ -29,35 +29,18 @@ class Game {
     }
     // remove an entity from the game
     destroy(entity) {
+        if(entity.getTag().includes("enemy")) {
+            this.level.currentRoom.destroy(entity);
+        }
         for (var i = 0; i < this.entities.length; i++) {
             if (this.entities[i] === entity) 
                 this.entities.splice(i,1);
         }
     }
+
     // simulation
     draw() {
-        textSize(32);
-        textFont('ArcadeClassic');
-        fill(color(250, 230, 215));
-        text("Level: " + this.level.levelNum, 10, 30);
-        text("Room: " + (this.level.rooms.indexOf(this.level.currentRoom) + 1) 
-            + "/" + this.level.rooms.length, 10, 60);
-        for (var i = 0; i < this.entities.length; i++) {
-            var entity = this.entities[i];
-            var pos = entity.getPos();
-            var col = entity.getCollider();
-            if (entity.getImage() != null) {
-                if (entity.getCollider().getType() == "circle") {
-                    let rad = col.getRadius()
-                    image(entity.getImage(),pos.x - rad,pos.y - rad,rad*2,rad*2)
-                    if (this.debugmode) circle(pos.x,pos.y,col.getRadius()*2)
-                }
-                else if (entity.getCollider().getType() == "box") {
-                    image(entity.getImage(),pos.x,pos.y,col.getHeight(),col.getWidth())
-                    if (this.debugmode) rect(pos.x,pos.y,col.getHeight(),col.getWidth())
-                }
-            }
-        }
+        this.level.drawLevel(this.entities);
     }
 
     // update entities and check collisions
@@ -83,6 +66,15 @@ class Game {
                 if (entity.getCollider().checkCollision(this.entities[j].getCollider())) {
                     entity.onCollision(this.entities[j]);
                     if (this.entities[j] != null) this.entities[j].onCollision(entity);
+                }
+            }
+
+            if(this.level.currentRoom.getExitHallway() != null) {
+                if(this.level.currentRoom.getExitHallway().checkPlayerInHallway(this.player)) {
+                    this.level.currentRoom = this.level.rooms[0];
+                    for(const enemy in this.level.currentRoom.enemies) {
+                        this.instantiate(this.level.currentRoom.enemies[enemy]);
+                    }
                 }
             }
         }

@@ -70,7 +70,7 @@ class Player extends Entity{
         if (keyIsDown(73)) {
             // shooting bullet
             var bullet = new Projectile(new p5.Vector(player.pos.x + 80,player.pos.y+40), new p5.Vector(1000,0));
-            console.log(bullet);
+            // console.log(bullet);
             g.instantiate(bullet);
             // shooting animation
             this.spritestate = this.shootstate;

@@ -16,8 +16,8 @@ class Projectile extends Entity{
 
         // if projectile collides with an enemy, enemy takes damage
         if(entity.getTag().includes("enemy")) {
-            entity.takeDamage(this.damage);
             Game.getInstance().destroy(this);
+            entity.takeDamage(this.damage);
         }
     }
 

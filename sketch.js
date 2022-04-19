@@ -15,7 +15,7 @@ function preload() {
   garlic = loadImage("assets/sprites/garlic/garlic1.png");
   tomato = loadImage("assets/sprites/tomato/tomato1.png");
   wall = loadImage("assets/sprites/tiles/tile1.png");
-  ceil =  loadImage("assets/sprites/tiles/tile0.png");
+  ceiling =  loadImage("assets/sprites/tiles/tile0.png");
   floortile = loadImage("assets/sprites/tiles/tile2.png");
 }
 
@@ -40,12 +40,6 @@ function draw() {
   var time = millis();
   var dt = (time - timelastcalled) / 1000;
   //image(ceil,0,60,1200,60)
-  image(wall,0,0,1000,60);
-  image(ceil,1000,240,200,60)
-  fill(color(0,0,0,255))
-  rect(1000,0,200,300)
-  rect(1000,500,200,300)
-  image(wall,1000,300,200,60);
   // prints floor tiles
   //for (var i = 60; i < 600; i+=60) {for (var j = 0; j < 600; j+=60) {image(floortile,j,i,60,60)}}
   fill(color(0,0,0,50))

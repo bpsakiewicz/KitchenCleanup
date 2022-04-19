@@ -16,9 +16,7 @@ class Enemy extends Entity{
 
         this.lNum = levelNum;
         this.health = this.lNum * 100;
-        // this.setImage(tomato)
-        // this.setSpriteState([loadImage("assets/sprites/tomato/tomato0.png"),loadImage("assets/sprites/tomato/tomato1.png")])
-    }
+}
 
     onCollision(other) {
         // TEMPORARY EXAMPLE
