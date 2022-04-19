@@ -5,9 +5,9 @@ class Level {
         this.levelNum = levelNum;
         this.rooms = this.generateRooms();
         this.currentRoom = this.rooms[0];
+        this.totalRooms = this.rooms.length;
         this.rooms.splice(0, 1);
         this.roomNum = 1;
-        this.totalRooms = this.rooms.length;
     }
 
     generateRooms() {
