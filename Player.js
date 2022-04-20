@@ -67,6 +67,7 @@ class Player extends Entity{
         if (keyIsDown(68) || keyIsDown(39)) dir.x = 5;
         if (keyIsDown(87) || keyIsDown(38)) dir.y = -5;
         if (keyIsDown(83) || keyIsDown(40)) dir.y = 5;
+        // implement rate of fire in this if condition maybe
         if (keyIsDown(73)) {
             // shooting bullet
             // AIM EXAMPLE

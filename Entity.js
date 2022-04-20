@@ -32,6 +32,23 @@ class Entity {
         //this.startstate.update(deltaTime)
     }
 
+    // draws the entity
+    draw() {
+        // here will be....
+        // damage flash
+        // shadows???
+        // applying image transformations
+        if (this.getImage() != null) {
+            if (this.collider.getType() == "circle") {
+                let rad = this.collider.getRadius()
+                image(this.getImage(),this.pos.x - rad,this.pos.y - rad,rad*2,rad*2)
+            }
+            else if (this.collider.getType() == "box") {
+                image(this.getImage(),this.pos.x,this.pos.y,this.collider.getHeight(),this.collider.getWidth())
+            }
+        }
+    }
+
     // getters
     getPos(){return this.pos}
     getVelocity(){return this.velocity}
