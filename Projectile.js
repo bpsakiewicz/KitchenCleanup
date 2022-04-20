@@ -1,7 +1,7 @@
 class Projectile extends Entity{
     constructor(pos,velocity){
-        super(pos,velocity,"projectile","circle",new p5.Vector(50,50));
-        this.setImage(loadImage("assets/sprites/bullets/flame.png"));
+        super(pos,velocity,"projectile","circle",new p5.Vector(40,40));
+        this.setImage(loadImage("assets/sprites/bullets/bulletb_ultra.png"));
 
         // set damage of the projectile
         // should be changed according to weapon

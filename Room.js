@@ -33,7 +33,7 @@ class Room {
     }
 
     drawRoom(entities) {
-        image(wall,0,0,1000,60);
+        image(wall,0,0,1100,60);
         // console.log(this.hall)
         if(this.entry != null) {
             this.entry.drawHallway();

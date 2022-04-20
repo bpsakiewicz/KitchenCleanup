@@ -9,6 +9,7 @@ class Entity {
         if (collider_type ==  "box") this.collider = new BoxCollider(pos, dimensions.x, dimensions.y);
         this.spritestate = null;
         this.dimensions = dimensions;
+        this.got_hit = false
     }
     // action on collision, other is the entity that is collided with
     // both entities have this function called on a collision
@@ -35,7 +36,11 @@ class Entity {
     // draws the entity
     draw() {
         // here will be....
-        // damage flash
+        // damage flash and sound
+        if (this.got_hit) {
+            tint(0,255);
+            this.got_hit = false;
+        }
         // shadows???
         // applying image transformations
         if (this.getImage() != null) {
@@ -47,6 +52,12 @@ class Entity {
                 image(this.getImage(),this.pos.x,this.pos.y,this.collider.getHeight(),this.collider.getWidth())
             }
         }
+        noTint();
+    }
+    // call when entity gets hit
+    hit() {
+        this.got_hit = true;
+        // insert hit sound here
     }
 
     // getters
@@ -63,6 +74,5 @@ class Entity {
         this.spritestate = new SpriteState([img]);
     }
     setSpriteState(sprite_list) {this.spritestate = new SpriteState(sprite_list)}
-
 
 }

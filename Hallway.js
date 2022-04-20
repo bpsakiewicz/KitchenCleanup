@@ -9,23 +9,27 @@ class Hallway {
     }
 
     drawHallway() {
-        if(this.locked) {
-            image(ceiling,1000,240,200,60);
-            image(wall,1000,300,200,60);
-            //making door
-            fill(color(165,42,42));
-            rect(1000, 200, 10, 300);
-
+            // RIGHT
+            //image(ceiling,1100,240,100,60);
+            image(wall,1100,300,100,60);
             // filling out the black
             fill(color(0,0,0,255));
-            rect(1000,0,200,300);
-            rect(1000,500,200,300);
-        } else{
-            image(ceiling,1000,240,200,60);
-            image(wall,1000,300,200,60);
+            rect(1100,0,100,300);
+            rect(1100,500,100,300);
+            // LEFT
+            //image(ceiling,1100,240,100,60);
+            image(wall,0,300,100,60);
+            // filling out the black
             fill(color(0,0,0,255));
-            rect(1000,0,200,300);
-            rect(1000,500,200,300);
+            rect(0,0,100,300);
+            rect(0,500,100,300);
+            // DOWN
+            rect(100,700,400,100);
+            rect(700,700,400,100);
+        if(this.locked) {
+            //making door
+            fill(color(165,42,42));
+            rect(1100, 300, 10, 200);
         }
     }
 
