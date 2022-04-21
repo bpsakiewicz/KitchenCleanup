@@ -52,7 +52,7 @@ class Entity {
         }
          // cast a shadow
          tint(255,60)
-         image(shadow,posx + sizex*0.05, posy + 10, sizex*0.9, sizey)
+         if (this.tag != "projectile") image(shadow,posx + sizex*0.05, posy + 10, sizex*0.9, sizey)
          noTint();
         // damage flash and sounds
         if (this.got_hit) {

@@ -57,9 +57,15 @@ class Player extends Entity{
         document.body.onclick = function() {
             //console.log("plz")
             //console.log(player);
-            var bullet = new Projectile(new p5.Vector(player.pos.x + 80,player.pos.y+40), new p5.Vector(1000,0));
+            // AIM EXAMPLE
+            /*
+            var mouse_dir = new p5.Vector(mouseX - this.pos.x, mouseY - this.pos.y)
+            console.log(mouse_dir);
+            var shoot_dir = p5.Vector.normalize(mouse_dir) * 200;
+            var bullet = new Projectile(new p5.Vector(player.pos.x + 60,player.pos.y+30), shoot_dir);
             // console.log(bullet);
             g.instantiate(bullet);
+            */
         }
         
         let dir = new p5.Vector(0,0,0);
@@ -71,10 +77,12 @@ class Player extends Entity{
         if (keyIsDown(73)) {
             // shooting bullet
             // AIM EXAMPLE
-            // need to enforce that the vectors magnitude is the same for all directions
-            // if dir is 0,0, set shoot_dir to x,0
-            // also need a way to "lock" shoot_dir with a button hold
-            var shoot_dir = new p5.Vector(dir.x * 200, dir.y * 200)
+            var mouse_dir = createVector(mouseX - this.pos.x, mouseY - this.pos.y);
+            mouse_dir = p5.Vector.normalize(mouse_dir);
+            var m = Math.sqrt( (mouse_dir.x * mouse_dir.x) + (mouse_dir.y * mouse_dir.y) )
+            mouse_dir = createVector(mouse_dir.x / m, mouse_dir.y / m);
+            var shoot_dir = createVector(mouse_dir.x *1000, mouse_dir.y *1000);
+            console.log(shoot_dir);
             var bullet = new Projectile(new p5.Vector(player.pos.x + 60,player.pos.y+30), shoot_dir);
             // console.log(bullet);
             g.instantiate(bullet);
