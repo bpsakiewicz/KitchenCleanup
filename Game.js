@@ -10,7 +10,7 @@ class Game {
         this.player = player;
         this.bounds = bounds;
         this.debugmode = 0;
-        this.level = new Level(10);
+        this.level = new Level(1);
         for(const enemy in this.level.currentRoom.enemies) {
             this.instantiate(this.level.currentRoom.enemies[enemy])
         }

@@ -74,7 +74,7 @@ class Player extends Entity{
         if (keyIsDown(87) || keyIsDown(38)) dir.y = -5;
         if (keyIsDown(83) || keyIsDown(40)) dir.y = 5;
         // implement rate of fire in this if condition maybe
-        if (keyIsDown(73)) {
+        if (mouseIsPressed) {
             // shooting bullet
             // AIM EXAMPLE
             var mouse_dir = createVector(mouseX - this.pos.x, mouseY - this.pos.y);

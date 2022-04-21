@@ -16,6 +16,8 @@ class Enemy extends Entity{
 
         this.lNum = levelNum;
         this.health = this.lNum * 100;
+        // for shoot behavior
+        this.shoot_time = 0;
 }
 
     onCollision(other) {
@@ -44,7 +46,22 @@ class Enemy extends Entity{
         if (this.spritestate == null) throw new Error("nro what");
         this.spritestate.update(deltaTime);
         this.updateVelocity(Player.getInstance().getPos());
-        //let i = deltaTime;
+
+        this.shoot_time += deltaTime;
+        // time to shoot!
+        if (this.shoot_time > 3) {
+            console.log("pow");
+            // ENEMY AIM
+            var mouse_dir = createVector(Player.getInstance().getPos().x - this.pos.x , Player.getInstance().getPos().y - this.pos.y);
+            mouse_dir = p5.Vector.normalize(mouse_dir);
+            var m = Math.sqrt( (mouse_dir.x * mouse_dir.x) + (mouse_dir.y * mouse_dir.y) )
+            mouse_dir = createVector(mouse_dir.x / m, mouse_dir.y / m);
+            var shoot_dir = createVector(mouse_dir.x *1000, mouse_dir.y *1000);
+            var bullet = new Projectile(new p5.Vector(this.pos.x + 60,this.pos.y+30), shoot_dir);
+            this.shoot_time = 0;
+            // console.log(bullet);
+            g.instantiate(bullet);
+        }
     }
 
     takeDamage(damage) {
