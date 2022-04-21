@@ -5,7 +5,8 @@ class Level {
         this.levelNum = levelNum;
         this.rooms = this.generateRooms();
         this.currentRoom = this.rooms[0];
-        this.totalRooms = this.rooms.length;
+        this.totalRooms = int(this.levelNum + sqrt(this.levelNum)) + 1;
+        this.currentRoom.generateEnemies(this.levelNum);
         this.roomNum = 0;
     }
 
@@ -54,6 +55,8 @@ class Level {
                 if(this.currentRoom.getExitHallway().checkPlayerInHallway(this.player)) {
                     this.currentRoom = this.rooms[this.roomNum + 1];
                     this.roomNum++;
+                    this.currentRoom.generateEnemies(this.levelNum);
+                    console.log(this.currentRoom.enemies)
                     for(const enemy in this.currentRoom.enemies) {
                         Game.getInstance().instantiate(this.currentRoom.enemies[enemy])
                     }
@@ -67,7 +70,7 @@ class Level {
         textFont('ArcadeClassic');
         fill(color(250, 230, 215));
         // text("hello", width / 2, height/2)
-        //tint(0,255)
+        //tint(0,255)ds
         text("Level: " + this.levelNum, 10, height - 40);
         text("Room: " + (this.roomNum + 1) + "/" + this.totalRooms, 10, height - 10);
         this.currentRoom.drawRoom(entities);
