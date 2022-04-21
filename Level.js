@@ -66,6 +66,8 @@ class Level {
     }
 
     drawLevel(entities) {
+        // render room before text
+        this.currentRoom.drawRoom(entities);
         textSize(32);
         textFont('ArcadeClassic');
         fill(color(250, 230, 215));
@@ -73,6 +75,5 @@ class Level {
         //tint(0,255)ds
         text("Level: " + this.levelNum, 10, height - 40);
         text("Room: " + (this.roomNum + 1) + "/" + this.totalRooms, 10, height - 10);
-        this.currentRoom.drawRoom(entities);
     }
 }

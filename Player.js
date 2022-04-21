@@ -4,7 +4,7 @@ class Player extends Entity{
         if(Player.instance){
             throw new Error("Player already made!");
         }
-        super(new p5.Vector(50,400), new p5.Vector(0,0), "player", "box", new p5.Vector(80,80));
+        super(new p5.Vector(50,400), new p5.Vector(0,0), "player", "box", new p5.Vector(60,60));
         Player.instance = this;
         //creates default player    
         this.alive = true;
@@ -67,9 +67,15 @@ class Player extends Entity{
         if (keyIsDown(68) || keyIsDown(39)) dir.x = 5;
         if (keyIsDown(87) || keyIsDown(38)) dir.y = -5;
         if (keyIsDown(83) || keyIsDown(40)) dir.y = 5;
+        // implement rate of fire in this if condition maybe
         if (keyIsDown(73)) {
             // shooting bullet
-            var bullet = new Projectile(new p5.Vector(player.pos.x + 80,player.pos.y+40), new p5.Vector(1000,0));
+            // AIM EXAMPLE
+            // need to enforce that the vectors magnitude is the same for all directions
+            // if dir is 0,0, set shoot_dir to x,0
+            // also need a way to "lock" shoot_dir with a button hold
+            var shoot_dir = new p5.Vector(dir.x * 200, dir.y * 200)
+            var bullet = new Projectile(new p5.Vector(player.pos.x + 60,player.pos.y+30), shoot_dir);
             // console.log(bullet);
             g.instantiate(bullet);
             // shooting animation

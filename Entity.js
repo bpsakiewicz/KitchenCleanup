@@ -9,6 +9,7 @@ class Entity {
         if (collider_type ==  "box") this.collider = new BoxCollider(pos, dimensions.x, dimensions.y);
         this.spritestate = null;
         this.dimensions = dimensions;
+        this.got_hit = false
     }
     // action on collision, other is the entity that is collided with
     // both entities have this function called on a collision
@@ -32,6 +33,47 @@ class Entity {
         //this.startstate.update(deltaTime)
     }
 
+    // adjusts image if needed and draw entity
+    draw() {
+        // store size variables to streamline the drawing process
+        var sizex,sizey;
+        var posx = this.pos.x;
+        var posy = this.pos.y;
+
+        if (this.collider.getType() == "circle") {
+            sizex = this.collider.getRadius()*2;
+            sizey = sizex;
+            posx = this.pos.x - sizex/2;
+            posy = this.pos.y - sizex/2;
+        }
+        if (this.collider.getType() == "box") {
+            sizex = this.collider.getWidth();
+            sizey = this.collider.getHeight();
+        }
+         // cast a shadow
+         tint(255,60)
+         image(shadow,posx + sizex*0.05, posy + 10, sizex*0.9, sizey)
+         noTint();
+        // damage flash and sounds
+        if (this.got_hit) {
+            tint(255,0,255);
+            this.got_hit = false;
+        }
+        // flip image based on velocity
+        if (this.velocity.x < 0) {
+            push();
+            scale(-1, 1)
+            image(this.getImage(),-posx - sizex, posy, sizex, sizey)
+            pop();
+          } else image(this.getImage(),posx,posy,sizex, sizey)
+         noTint();
+    }
+
+    // call when entity gets hit
+    hit() {
+        this.got_hit = true;
+        // insert hit sound here
+    }
     // getters
     getPos(){return this.pos}
     getVelocity(){return this.velocity}
@@ -46,6 +88,5 @@ class Entity {
         this.spritestate = new SpriteState([img]);
     }
     setSpriteState(sprite_list) {this.spritestate = new SpriteState(sprite_list)}
-
 
 }

@@ -33,7 +33,7 @@ class Room {
     }
 
     drawRoom(entities) {
-        image(wall,0,0,1000,60);
+        image(wall,0,0,1100,60);
         // console.log(this.hall)
         if(this.entry != null) {
             this.entry.drawHallway();
@@ -42,20 +42,14 @@ class Room {
         if(this.exit != null) {
             this.exit.drawHallway();
         }
-        
+        /*
+        // Dear Benny,
+            I moved draw specifics to entity class
+            Sincereley,
+            Liam
+        */
         for (var i = 0; i < entities.length; i++) {
-            var entity = entities[i];
-            var pos = entity.getPos();
-            var col = entity.getCollider();
-            if (entity.getImage() != null) {
-                if (col.getType() == "circle") {
-                    let rad = col.getRadius()
-                    image(entity.getImage(),pos.x - rad,pos.y - rad,rad*2,rad*2)
-                }
-                else if (col.getType() == "box") {
-                    image(entity.getImage(),pos.x,pos.y,col.getHeight(),col.getWidth())
-                }
-            }
+            entities[i].draw();
         }
     }
 

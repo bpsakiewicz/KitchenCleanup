@@ -4,19 +4,22 @@ var LOAD_IMAGES = 1
 var timelastcalled;
 var player;
 var g;
+// sounds
+// images
 var tomato;
 var garlic;
 var tomato;
 var wall;
-var ceil;
+var ceiling;
 var floortile;
+var shadow;
 function preload() {
-  classicCook = loadImage("assets/sprites/classic_cook.png"); //this is the player
   garlic = loadImage("assets/sprites/garlic/garlic1.png");
   tomato = loadImage("assets/sprites/tomato/tomato1.png");
   wall = loadImage("assets/sprites/tiles/tile1.png");
   ceiling =  loadImage("assets/sprites/tiles/tile0.png");
   floortile = loadImage("assets/sprites/tiles/tile2.png");
+  shadow = loadImage("assets/sprites/shadow.png")
 }
 
 function setup() {
