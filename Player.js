@@ -82,8 +82,8 @@ class Player extends Entity{
             var m = Math.sqrt( (mouse_dir.x * mouse_dir.x) + (mouse_dir.y * mouse_dir.y) )
             mouse_dir = createVector(mouse_dir.x / m, mouse_dir.y / m);
             var shoot_dir = createVector(mouse_dir.x *1000, mouse_dir.y *1000);
-            console.log(shoot_dir);
-            var bullet = new Projectile(new p5.Vector(player.pos.x + 60,player.pos.y+30), shoot_dir);
+            // console.log(shoot_dir);
+            var bullet = new Projectile(new p5.Vector(player.pos.x + 60,player.pos.y+30), shoot_dir, "player");
             // console.log(bullet);
             g.instantiate(bullet);
             // shooting animation

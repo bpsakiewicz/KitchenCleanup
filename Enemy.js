@@ -28,7 +28,7 @@ class Enemy extends Entity{
             Game.getInstance().destroy(this);
         }
 
-        if(tag == "projectile") {
+        if(tag == "projectile" && other.entityFrom == "player") {
             this.takeDamage(new Projectile(other).getDamage());
             if(this.health <= 0) {
                 Game.getInstance().destroy(this);
@@ -52,12 +52,14 @@ class Enemy extends Entity{
         if (this.shoot_time > 3) {
             console.log("pow");
             // ENEMY AIM
-            var mouse_dir = createVector(Player.getInstance().getPos().x - this.pos.x , Player.getInstance().getPos().y - this.pos.y);
-            mouse_dir = p5.Vector.normalize(mouse_dir);
-            var m = Math.sqrt( (mouse_dir.x * mouse_dir.x) + (mouse_dir.y * mouse_dir.y) )
-            mouse_dir = createVector(mouse_dir.x / m, mouse_dir.y / m);
-            var shoot_dir = createVector(mouse_dir.x *1000, mouse_dir.y *1000);
-            var bullet = new Projectile(new p5.Vector(this.pos.x + 60,this.pos.y+30), shoot_dir);
+            // var mouse_dir = createVector(Player.getInstance().getPos().x - this.pos.x , Player.getInstance().getPos().y - this.pos.y);
+            // mouse_dir = p5.Vector.normalize(mouse_dir);
+            // var m = Math.sqrt( (mouse_dir.x * mouse_dir.x) + (mouse_dir.y * mouse_dir.y) )
+            // mouse_dir = createVector(mouse_dir.x / m, mouse_dir.y / m);
+            // var shoot_dir = createVector(mouse_dir.x *1000, mouse_dir.y *1000);
+            console.log(this.velocity)
+            var bullet = new Projectile(new p5.Vector(this.pos.x + 60,this.pos.y+30), createVector(this.velocity.x * this.lNum * 10, this.velocity.y * this.lNum * 10), "enemy");
+            console.log(bullet)
             this.shoot_time = 0;
             // console.log(bullet);
             g.instantiate(bullet);

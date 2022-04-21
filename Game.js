@@ -14,6 +14,7 @@ class Game {
         for(const enemy in this.level.currentRoom.enemies) {
             this.instantiate(this.level.currentRoom.enemies[enemy])
         }
+        // console.log(this.level);
         //createCanvas(400, 400);
     }
     // singleton instance
@@ -47,6 +48,12 @@ class Game {
 
     // update entities and check collisions
     update(deltaTime) {
+        if(this.level.complete) {
+            // console.log(this.level.levelNum);
+            this.level = new Level(this.level.levelNum + 1);
+            this.level.currentRoom.loadEnemies();
+            // console.log(this.level.currentRoom)
+        }
         this.level.update(deltaTime);
         for (var i = 0; i < this.entities.length; i++) {
             var entity = this.entities[i];
