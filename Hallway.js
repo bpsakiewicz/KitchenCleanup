@@ -34,6 +34,6 @@ class Hallway {
     }
 
     checkPlayerInHallway(player) {
-        return player.getPos().x > 1000 && !this.locked;
+        return player.getPos().x > 1100 && !this.locked;
     }
 }

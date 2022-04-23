@@ -7,8 +7,8 @@ class Projectile extends Entity{
         // should be changed according to weapon
         this.damage = damage
 
-        //function delay(time) {return new Promise(resolve => setTimeout(resolve, time));}
-        //delay(time).then(() => g.destroy(this));
+        function delay(time) {return new Promise(resolve => setTimeout(resolve, time));}
+        delay(time).then(() => g.destroy(this));
     }
 
     // on collision

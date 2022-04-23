@@ -74,4 +74,14 @@ class Room {
     getExitHallway() {
         return this.exit;
     }
+
+    cleared() {
+        return this.enemies.length == 0;
+    }
+
+    loadEnemies() {
+        for(const enemy in this.enemies) {
+            Game.getInstance().instantiate(this.enemies[enemy])
+        }
+    }
 }
