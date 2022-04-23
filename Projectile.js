@@ -1,24 +1,19 @@
 class Projectile extends Entity{
-    constructor(pos,velocity){
-        super(pos,velocity,"projectile","circle",new p5.Vector(40,40));
-        this.setImage(loadImage("assets/sprites/bullets/bulletb_ultra.png"));
+    constructor(pos,velocity,tag,time,damage,image){
+        super(pos,velocity,tag,"circle",new p5.Vector(40,40));
+        this.setImage(image);
 
         // set damage of the projectile
         // should be changed according to weapon
-        this.damage = 50
+        this.damage = damage
 
-        function delay(time) {return new Promise(resolve => setTimeout(resolve, time));}
-        delay(500).then(() => g.destroy(this));
+        //function delay(time) {return new Promise(resolve => setTimeout(resolve, time));}
+        //delay(time).then(() => g.destroy(this));
     }
 
     // on collision
     onCollision(entity) {
-
-        // if projectile collides with an enemy, enemy takes damage
-        if(entity.getTag().includes("enemy")) {
-            entity.takeDamage(this.damage);
-            Game.getInstance().destroy(this);
-        }
+        // removed oncollision logic because it depends on who shot the projectile
     }
 
     // return the damage

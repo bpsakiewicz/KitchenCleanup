@@ -13,6 +13,8 @@ var wall;
 var ceiling;
 var floortile;
 var shadow;
+var bluebullet;
+var redbullet;
 function preload() {
   garlic = loadImage("assets/sprites/garlic/garlic1.png");
   tomato = loadImage("assets/sprites/tomato/tomato1.png");
@@ -20,6 +22,9 @@ function preload() {
   ceiling =  loadImage("assets/sprites/tiles/tile0.png");
   floortile = loadImage("assets/sprites/tiles/tile2.png");
   shadow = loadImage("assets/sprites/shadow.png")
+  // bullets
+  bluebullet = loadImage("assets/sprites/bullets/bulletb_ultra.png");
+  redbullet = loadImage("assets/sprites/bullets/bulletr_ultra.png")
 }
 
 function setup() {

@@ -10,8 +10,7 @@ class Player extends Entity{
         this.alive = true;
         this.weapon = weapon;
         this.armor = armor;
-        //asdwasdwthis.setImage(coolCook)
-        //this.health = armor.health;
+        this.health = 100;
         //this.ability = null; //implement abilitys??
         // sprite state
         this.idlestate = new SpriteState([loadImage("assets/sprites/cook/cookidle0.png"),loadImage("assets/sprites/cook/cookidle1.png"),loadImage("assets/sprites/cook/cookidle2.png")])
@@ -26,6 +25,18 @@ class Player extends Entity{
     //SINGLETON
     static getInstance(){
         return Player.instance;
+    }
+
+    onCollision(other) {
+        // get hurt from enemy bullets here
+        if (other.getTag() == "enemyprojectile") {
+            this.takeDamage(other.getDamage())
+            Game.getInstance().destroy(other)
+            if(this.health <= 0) {
+                // TODO: ADD DEATH STUFF HERE SEND PLAYER BACK TO MAIN MENU
+                Game.getInstance().destroy(this);
+            }
+        }
     }
 
     update(){
@@ -82,8 +93,7 @@ class Player extends Entity{
             var m = Math.sqrt( (mouse_dir.x * mouse_dir.x) + (mouse_dir.y * mouse_dir.y) )
             mouse_dir = createVector(mouse_dir.x / m, mouse_dir.y / m);
             var shoot_dir = createVector(mouse_dir.x *1000, mouse_dir.y *1000);
-            console.log(shoot_dir);
-            var bullet = new Projectile(new p5.Vector(player.pos.x + 60,player.pos.y+30), shoot_dir);
+            var bullet = new Projectile(new p5.Vector(player.pos.x + 60,player.pos.y+30), shoot_dir,"playerprojectile",500,50,bluebullet);
             // console.log(bullet);
             g.instantiate(bullet);
             // shooting animation
@@ -103,5 +113,12 @@ class Player extends Entity{
         if(this.pos.x + this.dimensions.x > width) this.pos.x -=5.5;
         if(this.pos.y < 0) this.pos.y += 5.5;
         if(this.pos.y + this.dimensions.y > height) this.pos.y -=5.5;
+    }
+
+    takeDamage(damage) {
+        console.log(this.health);
+        this.health -= damage;
+        this.hit()
+        // console.log(this.health);
     }
 }

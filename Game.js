@@ -30,7 +30,7 @@ class Game {
     // remove an entity from the game
     destroy(entity) {
 
-        if(entity.getTag().includes("enemy")) {
+        if(entity.getTag().includes("_enemy")) {
             this.level.currentRoom.destroy(entity);
         }
 
