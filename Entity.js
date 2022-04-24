@@ -45,14 +45,16 @@ class Entity {
             sizey = sizex;
             posx = this.pos.x - sizex/2;
             posy = this.pos.y - sizex/2;
+            //circle(this.pos.x,this.pos.y,sizex)
         }
         if (this.collider.getType() == "box") {
             sizex = this.collider.getWidth();
             sizey = this.collider.getHeight();
+            //rect(this.pos.x,this.pos.y,sizex,sizey)
         }
          // cast a shadow
          tint(255,60)
-         if (this.tag != "projectile") image(shadow,posx + sizex*0.05, posy + 10, sizex*0.9, sizey)
+         if (! this.tag.includes("projectile")) image(shadow,posx + sizex*0.05, posy + 10, sizex*0.9, sizey)
          noTint();
         // damage flash and sounds
         if (this.got_hit) {

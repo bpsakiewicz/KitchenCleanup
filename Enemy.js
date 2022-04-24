@@ -10,6 +10,11 @@ class Enemy extends Entity{
                 this.setImage(garlic)
                 this.setSpriteState([loadImage("assets/sprites/garlic/garlic0.png"),loadImage("assets/sprites/garlic/garlic1.png")]);
                 break;
+            case "carrot":
+                this.setImage(garlic)
+                this.setSpriteState([loadImage("assets/sprites/carrot/carrot0.png"),loadImage("assets/sprites/carrot/carrot1.png")]);
+                this.collider = new BoxCollider(this.pos, 80, 160)
+                    break;
             default:
                 break;
         }
@@ -18,6 +23,8 @@ class Enemy extends Entity{
         this.health = this.lNum * 100;
         // for shoot behavior
         this.shoot_time = 0;
+        this.shoot_behavior = [1,1.5];// min shoot time, randomness
+        this.shoot_period = this.shoot_behavior[0] + Math.random() * this.shoot_behavior[1]
 }
 
     onCollision(other) {
@@ -47,8 +54,9 @@ class Enemy extends Entity{
 
         this.shoot_time += deltaTime;
         // time to shoot!
-        if (this.shoot_time > 2) {
+        if (this.shoot_time > this.shoot_period) {
             this.shoot_time = 0;
+            this.shoot_period = this.shoot_behavior[0] + Math.random() * this.shoot_behavior[1]
             this.shoot()
         }
     }
@@ -61,7 +69,7 @@ class Enemy extends Entity{
         let m = Math.sqrt( (pl_dir.x * pl_dir.x) + (pl_dir.y * pl_dir.y) )
         pl_dir = createVector(pl_dir.x / m, pl_dir.y / m);
         let shoot_dir = createVector(pl_dir.x *1000, pl_dir.y *1000);
-        let bullet = new Projectile(new p5.Vector(this.pos.x,this.pos.y), shoot_dir,"enemyprojectile",1000,50,redbullet);
+        let bullet = new Projectile(new p5.Vector(this.pos.x,this.pos.y), shoot_dir,"enemyprojectile",1000,50,redbullet,new p5.Vector(40,40));
         // console.log(bullet);
         g.instantiate(bullet);
     }
@@ -71,5 +79,55 @@ class Enemy extends Entity{
         this.health -= damage;
         this.hit()
         // console.log(this.health);
+    }
+}
+
+// classes for each specific enemy
+// behavior is the same, but shoot is overloaded?
+// classic enemy
+class EnemyGarlic extends Enemy {
+    constructor(levelNum) {
+        super(["garlic","circle"],levelNum)
+    }
+}
+// CIRCLE SHOOT enemy
+class EnemyTomato extends Enemy {
+    constructor(levelNum) {
+        super(["tomato","circle"],levelNum)
+        this.shoot_behavior = [1,2]
+    }
+
+    shoot() {
+        let speed = 500;
+        let bullets = [
+            new Projectile(new p5.Vector(this.pos.x,this.pos.y), new p5.Vector(speed,0),"enemyprojectile",1000,25,redbullet,new p5.Vector(40,40)),
+            new Projectile(new p5.Vector(this.pos.x,this.pos.y), new p5.Vector(0,speed),"enemyprojectile",1000,25,redbullet,new p5.Vector(40,40)),
+            new Projectile(new p5.Vector(this.pos.x,this.pos.y), new p5.Vector(-speed,0),"enemyprojectile",1000,25,redbullet,new p5.Vector(40,40)),
+            new Projectile(new p5.Vector(this.pos.x,this.pos.y), new p5.Vector(0,-speed),"enemyprojectile",1000,25,redbullet,new p5.Vector(40,40)),
+            new Projectile(new p5.Vector(this.pos.x,this.pos.y), new p5.Vector(speed / 2, speed / 2),"enemyprojectile",1000,25,redbullet,new p5.Vector(40,40)),
+            new Projectile(new p5.Vector(this.pos.x,this.pos.y), new p5.Vector(- speed / 2, speed / 2),"enemyprojectile",1000,25,redbullet,new p5.Vector(40,40)),
+            new Projectile(new p5.Vector(this.pos.x,this.pos.y), new p5.Vector(speed / 2, - speed / 2),"enemyprojectile",1000,25,redbullet,new p5.Vector(40,40)),
+            new Projectile(new p5.Vector(this.pos.x,this.pos.y), new p5.Vector(- speed / 2, - speed / 2),"enemyprojectile",1000,25,redbullet,new p5.Vector(40,40))
+        ]
+        for (var i = 0; i < bullets.length; i++) g.instantiate(bullets[i]);
+    }
+}
+
+// MEGA SHOOT enemy
+class EnemyCarrot extends Enemy {
+    constructor(levelNum) {
+        super(["carrot","box"],levelNum)
+        this.shoot_behavior = [0.25,.75]
+    }
+    shoot() {
+        // ENEMY AIM
+        let pl_dir = createVector(Player.getInstance().getPos().x - this.pos.x , Player.getInstance().getPos().y - this.pos.y);
+        pl_dir = p5.Vector.normalize(pl_dir);
+        let m = Math.sqrt( (pl_dir.x * pl_dir.x) + (pl_dir.y * pl_dir.y) )
+        pl_dir = createVector(pl_dir.x / m, pl_dir.y / m);
+        let shoot_dir = createVector(pl_dir.x *800, pl_dir.y *800);
+        let bullet = new Projectile(new p5.Vector(this.pos.x + 40,this.pos.y + 40), shoot_dir,"enemyprojectile",5000,50,redbullet,new p5.Vector(40,40));
+        // console.log(bullet);
+        g.instantiate(bullet);
     }
 }

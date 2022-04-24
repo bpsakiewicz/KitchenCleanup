@@ -1,6 +1,6 @@
 class Projectile extends Entity{
-    constructor(pos,velocity,tag,time,damage,image){
-        super(pos,velocity,tag,"circle",new p5.Vector(40,40));
+    constructor(pos,velocity,tag,time,damage,image,dim){
+        super(pos,velocity,tag,"circle",dim);
         this.setImage(image);
 
         // set damage of the projectile

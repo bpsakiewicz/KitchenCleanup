@@ -44,7 +44,7 @@ function setup() {
 
 function draw() {
   //console.log("drawing")
-  background(100,100,130);
+  background(130,100,100);
   var time = millis();
   var dt = (time - timelastcalled) / 1000;
   //image(ceil,0,60,1200,60)

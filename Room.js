@@ -16,9 +16,19 @@ class Room {
 
         // ADD NEW ENEMY TYPES TO THIS ARRAY
         var enemyTypes = [["tomato", "circle"], ["garlic", "circle"]];
+        var enemyTypes = []
         for(let i = 0;  i < random(levelNum, levelNum + sqrt(levelNum)); i++) {
-            this.enemies[i] = new Enemy(random(enemyTypes), levelNum);
+            let r = Math.random() * 3;
+            // BENNY TODO
+            // enemy spawn rates could change based on difficulty
+            // enforce that some of level of diversity with larger amounts of enemies
+            if (r > 2) this.enemies[i] = new EnemyCarrot(levelNum);
+            else if (r > 1) this.enemies[i] = new EnemyTomato(levelNum);
+            else this.enemies[i] = new EnemyGarlic(levelNum);
+            //this.enemies[i] = new Enemy(random(enemyTypes), levelNum);
         }
+        //this.enemies[this.enemies.length] = new EnemyCarrot(levelNum);
+        //this.enemies[this.enemies.length] = new EnemyTomato(levelNum);
         return enemies;
     }
 
