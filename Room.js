@@ -28,7 +28,7 @@ class Room {
             //this.enemies[i] = new Enemy(random(enemyTypes), levelNum);
         }
         //this.enemies[this.enemies.length] = new EnemyCarrot(levelNum);
-        //this.enemies[this.enemies.length] = new EnemyTomato(levelNum);
+        this.enemies[this.enemies.length] = new SauceBoss(levelNum);
         return enemies;
     }
 

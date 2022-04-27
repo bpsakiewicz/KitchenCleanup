@@ -92,8 +92,7 @@ class Game {
     getDebugmode() {return this.debugmode}
 }
 /* 
-IDEAAAAA
-aim with wasd, i to shoot
-shift to walk really really slow so you can aim
-give enemies lots of heath and high rate of fire!!!!!!
+TODO LIAM
+adjust box collider hitboxes
+make enemies more red
 */

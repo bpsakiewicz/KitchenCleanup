@@ -56,6 +56,7 @@ class Entity {
          tint(255,60)
          if (! this.tag.includes("projectile")) image(shadow,posx + sizex*0.05, posy + 10, sizex*0.9, sizey)
          noTint();
+        //if (this.tag.includes("_enemy"))  tint(255,200,200);
         // damage flash and sounds
         if (this.got_hit) {
             tint(255,0,255);

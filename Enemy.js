@@ -4,7 +4,7 @@ class Enemy extends Entity{
         switch(enemyType[0]) {
             case "tomato":
                 this.setImage(tomato);
-                this.setSpriteState([loadImage("assets/sprites/tomato/tomato0.png"),loadImage("assets/sprites/tomato/tomato1.png")]);
+                this.setSpriteState([loadImage("assets/sprites/tomato1/stomato0.png"),loadImage("assets/sprites/tomato1/stomato1.png")]);
                 break;
             case "garlic":
                 this.setImage(garlic)
@@ -63,6 +63,7 @@ class Enemy extends Entity{
 
     // function for shooting behavior
     shoot() {
+        pistol_sound.play();
         // ENEMY AIM
         let pl_dir = createVector(Player.getInstance().getPos().x - this.pos.x , Player.getInstance().getPos().y - this.pos.y);
         pl_dir = p5.Vector.normalize(pl_dir);
@@ -130,4 +131,27 @@ class EnemyCarrot extends Enemy {
         // console.log(bullet);
         g.instantiate(bullet);
     }
+}
+
+// BOSS
+class SauceBoss extends Enemy {
+    constructor (levelNum) {
+        super(["",""],levelNum)
+        this.setSpriteState([loadImage("assets/sprites/spaghetti/spaghetti0.png"),loadImage("assets/sprites/spaghetti/spaghetti1.png")]);
+        this.collider = new BoxCollider(this.pos, 640, 320)
+        this.health = 2000;
+    }
+
+    shoot() {
+        // ENEMY AIM
+        let pl_dir = createVector(Player.getInstance().getPos().x - this.pos.x , Player.getInstance().getPos().y - this.pos.y);
+        pl_dir = p5.Vector.normalize(pl_dir);
+        let m = Math.sqrt( (pl_dir.x * pl_dir.x) + (pl_dir.y * pl_dir.y) )
+        pl_dir = createVector(pl_dir.x / m, pl_dir.y / m);
+        let shoot_dir = createVector(pl_dir.x *600, pl_dir.y *600);
+        let bullet = new Projectile(new p5.Vector(this.pos.x + 160,this.pos.y + 40), shoot_dir,"enemyprojectile",5000,50,redbullet,new p5.Vector(80,80));
+        // console.log(bullet);
+        g.instantiate(bullet);
+    }
+
 }
