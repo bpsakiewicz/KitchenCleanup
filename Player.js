@@ -84,8 +84,17 @@ class Player extends Entity{
         if (keyIsDown(68) || keyIsDown(39)) dir.x = 5;
         if (keyIsDown(87) || keyIsDown(38)) dir.y = -5;
         if (keyIsDown(83) || keyIsDown(40)) dir.y = 5;
+
         // implement rate of fire in this if condition maybe
-        if (mouseIsPressed) {
+        // use mouseIsPressed for mouse hold
+        // SHOOT METHOD IS CALLED ON MOUSE CLICK IN SKETCH.JS NOW
+        this.velocity.x = (dir.x)
+        this.velocity.y = (dir.y)
+    }
+    
+    // shoot a bullet
+    shoot() {
+            play_sound(shoot_sound);
             // shooting bullet
             // AIM EXAMPLE
             var mouse_dir = createVector(mouseX - this.pos.x, mouseY - this.pos.y);
@@ -99,11 +108,8 @@ class Player extends Entity{
             // shooting animation
             this.spritestate = this.shootstate;
             this.shootFrames = 1;
-        }
-        this.velocity.x = (dir.x)
-        this.velocity.y = (dir.y)
     }
-    
+
     checkBoundaries(){
         /*if(this.pos.x < 0 || this.pos.x > 1200 || this.pos.y < 0 || this.pos.y > 800){
             this.vel.x = 0;
@@ -118,6 +124,7 @@ class Player extends Entity{
     takeDamage(damage) {
         this.health -= damage;
         this.hit()
+        hit1_sound.play();
         // console.log(this.health);
     }
 }

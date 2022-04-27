@@ -63,7 +63,7 @@ class Enemy extends Entity{
 
     // function for shooting behavior
     shoot() {
-        pistol_sound.play();
+        play_sound(shoot1_sound);
         // ENEMY AIM
         let pl_dir = createVector(Player.getInstance().getPos().x - this.pos.x , Player.getInstance().getPos().y - this.pos.y);
         pl_dir = p5.Vector.normalize(pl_dir);
@@ -79,6 +79,7 @@ class Enemy extends Entity{
         console.log(this.health);
         this.health -= damage;
         this.hit()
+        play_sound(hit_sound)
         // console.log(this.health);
     }
 }
@@ -99,6 +100,7 @@ class EnemyTomato extends Enemy {
     }
 
     shoot() {
+        play_sound(shoot1_sound);
         let speed = 500;
         let bullets = [
             new Projectile(new p5.Vector(this.pos.x,this.pos.y), new p5.Vector(speed,0),"enemyprojectile",1000,25,redbullet,new p5.Vector(40,40)),
@@ -121,6 +123,7 @@ class EnemyCarrot extends Enemy {
         this.shoot_behavior = [0.25,.75]
     }
     shoot() {
+        play_sound(shoot1_sound);
         // ENEMY AIM
         let pl_dir = createVector(Player.getInstance().getPos().x - this.pos.x , Player.getInstance().getPos().y - this.pos.y);
         pl_dir = p5.Vector.normalize(pl_dir);
@@ -143,6 +146,7 @@ class SauceBoss extends Enemy {
     }
 
     shoot() {
+        play_sound(shoot1_sound);
         // ENEMY AIM
         let pl_dir = createVector(Player.getInstance().getPos().x - this.pos.x , Player.getInstance().getPos().y - this.pos.y);
         pl_dir = p5.Vector.normalize(pl_dir);

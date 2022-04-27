@@ -5,7 +5,11 @@ var timelastcalled;
 var player;
 var g;
 // sounds
-var pistol_sound;
+var song;
+var hit_sound;
+var hit1_sound;
+var shoot_sound;
+var shoot1_sound;
 // images
 var tomato;
 var garlic;
@@ -27,13 +31,23 @@ function preload() {
   bluebullet = loadImage("assets/sprites/bullets/bulletb_ultra.png");
   redbullet = loadImage("assets/sprites/bullets/bulletr_ultra.png");
   // sounds
-  pistol_sound = loadSound("assets/pistol.wav");
-
+  song= loadSound("assets/wombocombo.mp3");
+  hit_sound = loadSound("assets/UI_Electric_11.mp3");
+  hit1_sound = loadSound("assets/Arcade Creature Hit Pop 4.wav")
+  shoot_sound = loadSound("assets/Play Game Mech Hit 7.wav");
+  shoot1_sound = loadSound("assets/UI Hits Game 1.wav")
+  shoot_sound.setVolume(0.5);
+  shoot1_sound.setVolume(0.5);
+  hit1_sound.setVolume(0.5);
+}
+// function to randomize sound pitch
+function play_sound(sound) {
+  let diff = 0.25 - Math.random() * 0.5;
+  sound.rate(1 + diff);
+  sound.play();
 }
 
 function setup() {
-  pistol_sound.setVolume(1);
-  console.log(pistol_sound.isLoaded())
   var c = createCanvas(1200, 800);
   c.parent("canvas-div");
   timelastcalled = millis();
@@ -45,7 +59,7 @@ function setup() {
     //player.setImage(loadImage("assets/sprites/classic_cook.png"))
   }
   noSmooth()
-  console.log(g)
+  //song.loop();
 }
 
 function draw() {
@@ -60,4 +74,8 @@ function draw() {
   g.draw();
   g.update(dt);
   timelastcalled = millis();
+}
+
+function mouseClicked() {
+  player.shoot();
 }
