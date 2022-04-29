@@ -87,7 +87,8 @@ function draw() {
       fill(250, 230, 215);
       textAlign(CENTER);
       textSize(50);
-      text("Welcome    to    Kitchen    Cleanup!", width / 2, height / 4);
+      text("Welcome    to    Kitchen    Cleanup!", width / 2, height / 7);
+      text("Select  Faction", width / 2, height / 4);
       rectMode(CENTER);
       text("Master Chef", width / 2, height / 2.5 + 20)
       rectMode(CENTER);
