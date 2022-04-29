@@ -44,14 +44,14 @@ class Level {
         if(this.currentRoom.cleared()) {
             if(this.roomNum + 1 == this.totalRooms) {
                 this.complete = true;
-                Game.getInstance().destroy(this.currentRoom.getDoor())
+                Game.getInstance().destroy(this.currentRoom.getExit())
             }
             //this.loadNextRoom();
         }
     }
 
     loadNextRoom() {
-        let d = this.currentRoom.getDoor()
+        let d = this.currentRoom.getExit()
         this.player.teleport(new p5.Vector(BOUNDS.x - d.getPos().x, d.getPos().y))
         Game.getInstance().destroy(d)
         // update the current room to be the next one

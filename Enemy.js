@@ -1,6 +1,7 @@
 class Enemy extends Entity{
     constructor(enemyType, levelNum) {
-        super(new p5.Vector(random(width / 2, width - 100), random(100, height - 100)), new p5.Vector(0, 0), enemyType[0] + "_enemy", enemyType[1], new p5.Vector(80, 80));
+        let spawn_range = 200;
+        super(new p5.Vector(random(spawn_range, width - spawn_range), random(spawn_range, height - spawn_range)), new p5.Vector(0, 0), enemyType[0] + "_enemy", enemyType[1], new p5.Vector(80, 80));
         switch(enemyType[0]) {
             case "tomato":
                 this.setImage(tomato);

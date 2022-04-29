@@ -35,7 +35,7 @@ function preload() {
   peabullet = loadImage("assets/sprites/bullets/pea.png")
   starbullet = loadImage("assets/sprites/bullets/star.png")
   // sounds
-  song= loadSound("assets/wombocombo.mp3");
+  song= loadSound("assets/song.mp3");
   hit_sound = loadSound("assets/UI_Electric_11.mp3");
   hit1_sound = loadSound("assets/Arcade Creature Hit Pop 4.wav")
   shoot_sound = loadSound("assets/Play Game Mech Hit 7.wav");
@@ -64,7 +64,7 @@ function setup() {
   }
   textFont("ArcadeClassic");
   noSmooth()
-  //song.loop();
+  song.loop();
 }
 
 function draw() {

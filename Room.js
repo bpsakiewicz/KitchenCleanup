@@ -7,12 +7,13 @@ class Room {
         this.enemies = [];
         this.obstacles = [];
         this.levelNum = levelNum;
-        this.door = new Door(new p5.Vector(1150,400));
+        this.exit = new Door(new p5.Vector(1150,400));
         this.exit_active = false;
     }
 
     generateEnemies(levelNum) {
         const enemies = [];
+        levelNum += 1;
         for(let i = 0;  i < random(levelNum, levelNum + sqrt(levelNum)); i++) {
             let r = Math.random() * 3;
             // BENNY TODO
@@ -33,7 +34,7 @@ class Room {
             this.enemies[enemy].update(deltaTime);
         }
         if (this.cleared() && !this.exit_active) {
-            Game.getInstance().instantiate(this.door)
+            Game.getInstance().instantiate(this.exit)
             this.exit_active = true;
         }
     }
@@ -63,5 +64,5 @@ class Room {
         }
     }
 
-    getDoor() {return this.door}
+    getExit() {return this.exit}
 }
