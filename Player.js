@@ -1,5 +1,5 @@
 class Player extends Entity{
-    constructor(weapon,armor){
+    constructor(){
         //singleton
         if(Player.instance){
             throw new Error("Player already made!");
@@ -8,10 +8,10 @@ class Player extends Entity{
         Player.instance = this;
         //creates default player    
         this.alive = true;
-        this.weapon = weapon;
-        this.armor = armor;
-        this.weaponBehavior = new Star();
-        this.health = 100;
+        this.faction = new MasterChefFactionFactory();
+        this.weaponBehavior = this.faction.createWeapon();
+        this.armor = this.faction.createArmor();
+        this.health = this.armor.health;
         //this.ability = null; //implement abilitys??
         // sprite state
         this.idlestate = new SpriteState([loadImage("assets/sprites/cook/cookidle0.png"),loadImage("assets/sprites/cook/cookidle1.png"),loadImage("assets/sprites/cook/cookidle2.png")])
@@ -37,13 +37,14 @@ class Player extends Entity{
             Game.getInstance().destroy(other)
             if(this.health <= 0) {
                 // TODO: ADD DEATH STUFF HERE SEND PLAYER BACK TO MAIN MENU
-                //dwaGame.getInstance().destroy(this);
+                Game.getInstance().destroy(this);
             }
         }
     }
 
     update(deltaTime){
         //adjusts position to velocity of player
+        console.log(this.health);
         this.checkBoundaries();
         this.playerInput();
         this.pos.x += this.velocity.x;
@@ -51,8 +52,6 @@ class Player extends Entity{
         this.shoot_time += deltaTime;
         //console.log(this.getPos());
         //console.log(this.getVelocity());
-        console.log(this.shoot_time)
-        console.log(this.canShoot);
         if(this.shoot_time > this.weaponBehavior.shoot_period){
             this.canShoot = true;
         }
@@ -106,12 +105,10 @@ class Player extends Entity{
             mouse_dir = createVector(mouse_dir.x / m, mouse_dir.y / m);
             var shoot_dir = createVector(mouse_dir.x *1000, mouse_dir.y *1000);
             const bullet = this.weaponBehavior.shoot(player.pos.x,player.pos.y,mouse_dir.x,mouse_dir.y);
-            //var bullet = new Projectile(new p5.Vector(player.pos.x + 60,player.pos.y+30), shoot_dir,"playerprojectile",500,50,bluebullet,new p5.Vector(40,40));
-            // console.log(bullet);
+            //makes bullets
             for(const b of bullet){
                 g.instantiate(b);
             }
-            //g.instantiate(bullet[0]);
             // shooting animation
             this.spritestate = this.shootstate;
             this.shootFrames = 1;
