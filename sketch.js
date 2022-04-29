@@ -57,7 +57,7 @@ function setup() {
   timelastcalled = millis();
   // g.instantiate(TESTBUMPER);
   // g.instantiate(TESTBUMPER1);
-  player = new Player("Knive","Bandana")
+  player = new Player()
   g = new Game(player,new p5.Vector(1175,775));
   if (LOAD_IMAGES) {
     //player.setImage(loadImage("assets/sprites/classic_cook.png"))
@@ -81,13 +81,19 @@ function draw() {
       // draw menu
       console.log("main menu")
       fill(130, 100, 100);
-      rect(width / 2, height / 2, 500, 100);
+      rect(width / 2, height / 2.5, 500, 100);
+      rect(width / 2, height / 1.7, 500, 100);
+      rect(width / 2, height / 1.25, 500, 100);
       fill(250, 230, 215);
       textAlign(CENTER);
       textSize(50);
       text("Welcome    to    Kitchen    Cleanup!", width / 2, height / 4);
       rectMode(CENTER);
-      text("PLAY", width / 2, height / 2 + 20)
+      text("Master Chef", width / 2, height / 2.5 + 20)
+      rectMode(CENTER);
+      text("Sous Chef", width / 2, height / 1.7 + 20)
+      rectMode(CENTER);
+      text("Exterminator", width / 2, height / 1.25 + 20)
       break;
     case "playing":
       g.draw();
@@ -106,12 +112,24 @@ function draw() {
 function mouseClicked() {
   switch(g.gameState) {
     case "mainMenu":
-      if(mouseX >= width / 2 - 250 && mouseX <= width / 2 + 250 && mouseY >= height / 2 - 50 && mouseY <= height / 2 + 50) {
+      if(mouseX >= width / 2 - 250 && mouseX <= width / 2 + 250 && mouseY >= height / 2.5 - 50 && mouseY <= height / 2.5 + 50) {
         g.gameState = "playing";
+        player.faction = new MasterChefFactionFactory();
+        player.setup();
+      }
+      if(mouseX >= width / 2 - 250 && mouseX <= width / 2 + 250 && mouseY >= height / 1.7 - 50 && mouseY <= height / 1.7 + 50) {
+        g.gameState = "playing";
+        player.faction = new SousChefFactionFactory();
+        player.setup();
+      }
+      if(mouseX >= width / 2 - 250 && mouseX <= width / 2 + 250 && mouseY >= height / 1.25 - 50 && mouseY <= height / 1.25 + 50) {
+        g.gameState = "playing";
+        player.faction = new ExterminatorFactionFactory();
+        player.setup();
       }
       break;
     case "playing":
-      player.shoot();
+      //player.shoot();
       break;
   }
   // player.shoot();

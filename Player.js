@@ -9,8 +9,8 @@ class Player extends Entity{
         //creates default player    
         this.alive = true;
         //this.faction = new MasterChefFactionFactory();
-        this.faction = new SousChefFactionFactory();
-        //this.faction = new ExterminatorFactionFactory();
+        //this.faction = new SousChefFactionFactory();
+        this.faction = new ExterminatorFactionFactory();
         this.weaponBehavior = this.faction.createWeapon();
         this.armor = this.faction.createArmor();
         this.health = this.armor.health;
@@ -26,6 +26,11 @@ class Player extends Entity{
         this.shoot_time = 0;
         this.canShoot = false;
 
+    }
+    setup(){
+        this.weaponBehavior = this.faction.createWeapon();
+        this.armor = this.faction.createArmor();
+        this.health = this.armor.health;
     }
     //SINGLETON
     static getInstance(){
