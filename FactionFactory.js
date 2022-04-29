@@ -30,3 +30,15 @@ class SousChefFactionFactory extends FactionFactory{
         return new Bandana();
     }
 }
+
+class ExterminatorFactionFactory extends FactionFactory{
+    constructor(){
+        super();
+    }
+    createWeapon(){
+        return new Bullet();
+    }
+    createArmor(){
+        return new Scrubs();
+    }
+}
