@@ -3,7 +3,7 @@ class Level {
     constructor(levelNum) {
         this.player = Player.getInstance();
         this.levelNum = levelNum;
-        this.totalRooms = int(this.levelNum + sqrt(this.levelNum));
+        this.totalRooms = 5;
         this.rooms = []
         this.generateRooms();
         this.currentRoom = this.rooms[0];
@@ -44,13 +44,16 @@ class Level {
         if(this.currentRoom.cleared()) {
             if(this.roomNum + 1 == this.totalRooms) {
                 this.complete = true;
-                return;
+                Game.getInstance().destroy(this.currentRoom.getDoor())
             }
-            this.loadNextRoom();
+            //this.loadNextRoom();
         }
     }
 
     loadNextRoom() {
+        let d = this.currentRoom.getDoor()
+        this.player.teleport(new p5.Vector(BOUNDS.x - d.getPos().x, d.getPos().y))
+        Game.getInstance().destroy(d)
         // update the current room to be the next one
         this.currentRoom = this.rooms[this.roomNum + 1];
         this.roomNum++;

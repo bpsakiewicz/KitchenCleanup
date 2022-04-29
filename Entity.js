@@ -77,6 +77,13 @@ class Entity {
         this.got_hit = true;
         // insert hit sound here
     }
+    // call when moving enemy to a new location
+    teleport(pos) {
+        this.pos = pos;
+        if (this.collider.getType() == "circle") this.collider = new CircleCollider(pos,this.dimensions.x / 2);
+        if (this.collider.getType() ==  "box") this.collider = new BoxCollider(pos, this.dimensions.x, this.dimensions.y);
+    }
+
     // getters
     getPos(){return this.pos}
     getVelocity(){return this.velocity}

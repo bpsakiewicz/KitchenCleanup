@@ -7,6 +7,8 @@ class Room {
         this.enemies = [];
         this.obstacles = [];
         this.levelNum = levelNum;
+        this.door = new Door(new p5.Vector(1150,400));
+        this.exit_active = false;
     }
 
     generateEnemies(levelNum) {
@@ -29,6 +31,10 @@ class Room {
     update(deltaTime) {
         for(const enemy in this.enemies) {
             this.enemies[enemy].update(deltaTime);
+        }
+        if (this.cleared() && !this.exit_active) {
+            Game.getInstance().instantiate(this.door)
+            this.exit_active = true;
         }
     }
 
@@ -56,4 +62,6 @@ class Room {
             g.instantiate(this.enemies[enemy])
         }
     }
+
+    getDoor() {return this.door}
 }

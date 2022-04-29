@@ -4,6 +4,8 @@ var LOAD_IMAGES = 1
 var timelastcalled;
 var player;
 var g;
+// canvas bounds
+var BOUNDS = new p5.Vector(1200, 800);
 // sounds
 var song;
 var hit_sound;
@@ -50,7 +52,7 @@ function play_sound(sound) {
 }
 
 function setup() {
-  var c = createCanvas(1200, 800);
+  var c = createCanvas(BOUNDS.x, BOUNDS.y);
   c.parent("canvas-div");
   timelastcalled = millis();
   // g.instantiate(TESTBUMPER);

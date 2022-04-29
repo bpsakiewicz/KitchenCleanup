@@ -8,8 +8,8 @@ class Player extends Entity{
         Player.instance = this;
         //creates default player    
         this.alive = true;
-        this.faction = new MasterChefFactionFactory();
-        //this.faction = new SousChefFactionFactory();
+        //this.faction = new MasterChefFactionFactory();
+        this.faction = new SousChefFactionFactory();
         //this.faction = new ExterminatorFactionFactory();
         this.weaponBehavior = this.faction.createWeapon();
         this.armor = this.faction.createArmor();
@@ -46,7 +46,7 @@ class Player extends Entity{
 
     update(deltaTime){
         //adjusts position to velocity of player
-        console.log(this.health);
+        console.assert(this.pos.x == this.collider.getPos().x);
         this.checkBoundaries();
         this.playerInput();
         this.pos.x += this.velocity.x;
