@@ -9,7 +9,9 @@ class Player extends Entity{
         //creates default player    
         this.alive = true;
         this.faction = new MasterChefFactionFactory();
-        this.weaponBehavior = new Bullet()//this.faction.createWeapon();
+        //this.faction = new SousChefFactionFactory();
+        //this.faction = new ExterminatorFactionFactory();
+        this.weaponBehavior = this.faction.createWeapon();
         this.armor = this.faction.createArmor();
         this.health = this.armor.health;
         //this.ability = null; //implement abilitys??
