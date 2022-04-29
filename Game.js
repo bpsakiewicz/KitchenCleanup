@@ -14,6 +14,7 @@ class Game {
         for(const enemy in this.level.currentRoom.enemies) {
             this.instantiate(this.level.currentRoom.enemies[enemy])
         }
+        this.gameState = "mainMenu"
         // console.log(this.level);
         //createCanvas(400, 400);
     }
@@ -48,35 +49,55 @@ class Game {
 
     // update entities and check collisions
     update(deltaTime) {
-        if(this.level.complete) {
-            // console.log(this.level.levelNum);
-            this.level = new Level(this.level.levelNum + 1);
-            this.level.currentRoom.loadEnemies();
-            // console.log(this.level.currentRoom)
-        }
-        this.level.update(deltaTime);
-        for (var i = 0; i < this.entities.length; i++) {
-            var entity = this.entities[i];
-            if(entity.getTag() == "player") {
-                // update the entity
-                entity.update(deltaTime);
-            }
+        console.log(this.gameState)
 
-            // update position
-            if (entity.pos.x < this.bounds.x)
-                entity.pos.x += entity.velocity.x * deltaTime;
-            if (entity.pos.y < this.bounds.y)
-                entity.pos.y += entity.velocity.y * deltaTime;
-            // collide entities
-            for (var j = i+1; j < this.entities.length; j++) {
-                //console.log(i,j);
-                if (entity.getTag() == this.entities[j].getTag()) continue; // temporary?????
-                //console.log(this.entities[i].getCollider());
-                if (entity.getCollider().checkCollision(this.entities[j].getCollider())) {
-                    entity.onCollision(this.entities[j]);
-                    if (this.entities[j] != null) this.entities[j].onCollision(entity);
+        switch(this.gameState) {
+            case "playing":
+                if(!this.player.alive) {
+                    // console.log("esjfsfkldj")
+                    this.gameState = "playerDied";
+                    break;
                 }
-            }
+                // playing game     
+                if(this.level.complete) {
+                    // console.log(this.level.levelNum);
+                    this.level = new Level(this.level.levelNum + 1);
+                    this.level.currentRoom.loadEnemies();
+                    // console.log(this.level.currentRoom)
+                }
+                this.level.update(deltaTime);
+                for (var i = 0; i < this.entities.length; i++) {
+                    var entity = this.entities[i];
+                    if(entity.getTag() == "player") {
+                        // update the entity
+                        entity.update(deltaTime);
+                    }
+
+                    // update position
+                    if (entity.pos.x < this.bounds.x)
+                        entity.pos.x += entity.velocity.x * deltaTime;
+                    if (entity.pos.y < this.bounds.y)
+                        entity.pos.y += entity.velocity.y * deltaTime;
+                    // collide entities
+                    for (var j = i+1; j < this.entities.length; j++) {
+                        //console.log(i,j);
+                        if (entity.getTag() == this.entities[j].getTag()) continue; // temporary?????
+                        //console.log(this.entities[i].getCollider());
+                        if (entity.getCollider().checkCollision(this.entities[j].getCollider())) {
+                            entity.onCollision(this.entities[j]);
+                            if (this.entities[j] != null) this.entities[j].onCollision(entity);
+                        }
+                    }
+                }
+                break;
+            case "playerDied":
+                console.log(this.gameState)
+                this.reset();
+                // player dies -> either restart or main menu
+                break;
+            default:
+                break;
+
 
             // if(this.level.currentRoom.getExitHallway() != null) {
             //     if(this.level.currentRoom.getExitHallway().checkPlayerInHallway(this.player)) {
@@ -86,6 +107,17 @@ class Game {
             //         }
             //     }
             // } 
+        }
+    }
+
+    reset() {
+        console.log("hello")
+        this.level = new Level(1);
+        this.player.reset();
+        this.gameState = "mainMenu";
+        this.entities = [this.player];
+        for(const enemy in this.level.currentRoom.enemies) {
+            this.instantiate(this.level.currentRoom.enemies[enemy])
         }
     }
     // getters

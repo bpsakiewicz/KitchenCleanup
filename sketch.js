@@ -58,6 +58,7 @@ function setup() {
   if (LOAD_IMAGES) {
     //player.setImage(loadImage("assets/sprites/classic_cook.png"))
   }
+  textFont("ArcadeClassic");
   noSmooth()
   //song.loop();
 }
@@ -71,11 +72,43 @@ function draw() {
   // prints floor tiles
   //for (var i = 60; i < 600; i+=60) {for (var j = 0; j < 600; j+=60) {image(floortile,j,i,60,60)}}
   fill(color(0,0,0,50))
-  g.draw();
-  g.update(dt);
+  switch(g.gameState) {
+    case "mainMenu":
+      // draw menu
+      console.log("main menu")
+      fill(130, 100, 100);
+      rect(width / 2, height / 2, 500, 100);
+      fill(250, 230, 215);
+      textAlign(CENTER);
+      textSize(50);
+      text("Welcome    to    Kitchen    Cleanup!", width / 2, height / 4);
+      rectMode(CENTER);
+      text("PLAY", width / 2, height / 2 + 20)
+      break;
+    case "playing":
+      g.draw();
+      g.update(dt);
+      break;
+    case "playerDied":
+      g.reset();
+    default:
+      break;
+      // g.gameState = "mainMenu"
+  }
+
   timelastcalled = millis();
 }
 
 function mouseClicked() {
-  player.shoot();
+  switch(g.gameState) {
+    case "mainMenu":
+      if(mouseX >= width / 2 - 250 && mouseX <= width / 2 + 250 && mouseY >= height / 2 - 50 && mouseY <= height / 2 + 50) {
+        g.gameState = "playing";
+      }
+      break;
+    case "playing":
+      player.shoot();
+      break;
+  }
+  // player.shoot();
 }

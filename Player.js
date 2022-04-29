@@ -34,7 +34,7 @@ class Player extends Entity{
             Game.getInstance().destroy(other)
             if(this.health <= 0) {
                 // TODO: ADD DEATH STUFF HERE SEND PLAYER BACK TO MAIN MENU
-                Game.getInstance().destroy(this);
+                this.alive = false;
             }
         }
     }
@@ -126,5 +126,22 @@ class Player extends Entity{
         this.hit()
         hit1_sound.play();
         // console.log(this.health);
+    }
+
+    reset() {
+        console.log("player reset")
+        Player.instance = this;
+        //creates default player    
+        this.alive = true;
+        this.health = 100;
+        //this.ability = null; //implement abilitys??
+        // sprite state
+        this.idlestate = new SpriteState([loadImage("assets/sprites/cook/cookidle0.png"),loadImage("assets/sprites/cook/cookidle1.png"),loadImage("assets/sprites/cook/cookidle2.png")])
+        this.walkstate = new SpriteState([loadImage("assets/sprites/cook/cookwalk0.png"),loadImage("assets/sprites/cook/cookwalk1.png"),loadImage("assets/sprites/cook/cookwalk2.png")])
+        this.shootstate =  new SpriteState([loadImage("assets/sprites/shooter/shooter0.png"),loadImage("assets/sprites/shooter/shooter1.png"),loadImage("assets/sprites/shooter/shooter2.png"),loadImage("assets/sprites/shooter/shooter3.png")])
+        this.walkstate.setPeriod(5);
+        this.shootstate.setPeriod(1);
+        this.shootFrames = 0;
+        this.spritestate = this.idlestate;
     }
 }
