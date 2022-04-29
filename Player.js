@@ -135,11 +135,13 @@ class Player extends Entity{
     }
 
     reset() {
-        console.log("player reset")
-        Player.instance = this;
-        //creates default player    
         this.alive = true;
-        this.health = 100;
+        this.faction = new MasterChefFactionFactory();
+        //this.faction = new SousChefFactionFactory();
+        //this.faction = new ExterminatorFactionFactory();
+        this.weaponBehavior = this.faction.createWeapon();
+        this.armor = this.faction.createArmor();
+        this.health = this.armor.health;
         //this.ability = null; //implement abilitys??
         // sprite state
         this.idlestate = new SpriteState([loadImage("assets/sprites/cook/cookidle0.png"),loadImage("assets/sprites/cook/cookidle1.png"),loadImage("assets/sprites/cook/cookidle2.png")])
@@ -149,5 +151,8 @@ class Player extends Entity{
         this.shootstate.setPeriod(1);
         this.shootFrames = 0;
         this.spritestate = this.idlestate;
+        this.shoot_time = 0;
+        this.canShoot = false;
+
     }
 }

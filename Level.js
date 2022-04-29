@@ -63,15 +63,15 @@ class Level {
         // render room before text
         this.currentRoom.drawRoom(entities);
         textSize(32);
-        textFont('ArcadeClassic');
         fill(color(250, 230, 215));
+        textAlign(LEFT)
         // text("hello", width / 2, height/2)
         //tint(0,255)ds
         text("Level: " + this.levelNum, 10, height - 40);
         text("Room: " + (this.roomNum + 1) + "/" + this.totalRooms, 10, height - 10);
         //can put this whereever or not use
-        text("Health: " + player.health, 900, height - 60);
-        text("Weapon: " + player.weaponBehavior.name, 900, height - 30);
-        text("Armor: " + player.armor.name, 900, height - 0);
+        text("Health: " + player.health, 800, height - 60);
+        text("Weapon: " + player.weaponBehavior.name, 800, height - 30);
+        text("Armor: " + player.armor.name, 800, height - 0);
     }
 }
