@@ -3,36 +3,38 @@ class Level {
     constructor(levelNum) {
         this.player = Player.getInstance();
         this.levelNum = levelNum;
-        this.rooms = this.generateRooms();
-        this.currentRoom = this.rooms[0];
         this.totalRooms = int(this.levelNum + sqrt(this.levelNum));
+        this.rooms = []
+        this.generateRooms();
+        this.currentRoom = this.rooms[0];
         this.currentRoom.generateEnemies(this.levelNum);
         this.roomNum = 0;
         this.complete = false;
+        //Game.getInstance().instantiate(new Door(new p5.Vector(500,500)))
     }
 
     generateRooms() {
-        const rooms = [new Room(this.levelNum, 0, 0)];
-        for(let i = 1; i < this.levelNum + sqrt(this.levelNum); i++) {
+        this.rooms = [new Room(this.levelNum, 0, 0)];
+        for(let i = 1; i < this.totalRooms; i++) {
+            // attach first room
             let direction = random([0, 1, 2, 3]);
             switch(direction){
                 case 0:
-                    rooms[i] = new Room(this.levelNum, rooms[i - 1].x - 1, rooms[i - 1].y);
+                    this.rooms[i] = new Room(this.levelNum, this.rooms[i - 1].x - 1, this.rooms[i - 1].y);
                     break;
                 case 1:
-                    rooms[i] = new Room(this.levelNum, rooms[i - 1].x, rooms[i - 1].y - 1);
+                    this.rooms[i] = new Room(this.levelNum, this.rooms[i - 1].x, this.rooms[i - 1].y - 1);
                     break;
                 case 2:
-                    rooms[i] = new Room(this.levelNum, rooms[i - 1].x + 1, rooms[i - 1].y);
+                    this.rooms[i] = new Room(this.levelNum, this.rooms[i - 1].x + 1, this.rooms[i - 1].y);
                     break;
                 case 3:
-                    rooms[i] = new Room(this.levelNum, rooms[i - 1].x, rooms[i - 1].y + 1);
+                    this.rooms[i] = new Room(this.levelNum, this.rooms[i - 1].x, this.rooms[i - 1].y + 1);
                     break;
                 default:
                     break;
             }
         }
-        return rooms;
     }
 
     update(deltaTime) {
@@ -52,8 +54,9 @@ class Level {
         // update the current room to be the next one
         this.currentRoom = this.rooms[this.roomNum + 1];
         this.roomNum++;
+        // load new level
         this.currentRoom.generateEnemies(this.levelNum);
-        this.currentRoom.loadEnemies();
+        this.currentRoom.load();
     }
 
     drawLevel(entities) {

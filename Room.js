@@ -7,8 +7,6 @@ class Room {
         this.enemies = [];
         this.obstacles = [];
         this.levelNum = levelNum;
-        this.entry = null;
-        this.exit = null;
     }
 
     generateEnemies(levelNum) {
@@ -35,15 +33,8 @@ class Room {
     }
 
     drawRoom(entities) {
-        image(wall,0,0,1100,60);
+        image(wall,0,0,1200,60);
         // console.log(this.hall)
-        if(this.entry != null) {
-            this.entry.drawHallway();
-        }
-
-        if(this.exit != null) {
-            this.exit.drawHallway();
-        }
         for (var i = 0; i < entities.length; i++) {
             entities[i].draw();
         }
@@ -59,9 +50,10 @@ class Room {
         return this.enemies.length == 0;
     }
 
-    loadEnemies() {
+    load() {
+        let g = Game.getInstance()
         for(const enemy in this.enemies) {
-            Game.getInstance().instantiate(this.enemies[enemy])
+            g.instantiate(this.enemies[enemy])
         }
     }
 }

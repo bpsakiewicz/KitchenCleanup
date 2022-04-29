@@ -51,7 +51,7 @@ class Game {
         if(this.level.complete) {
             // console.log(this.level.levelNum);
             this.level = new Level(this.level.levelNum + 1);
-            this.level.currentRoom.loadEnemies();
+            this.level.currentRoom.load();
             // console.log(this.level.currentRoom)
         }
         this.level.update(deltaTime);
@@ -90,6 +90,7 @@ class Game {
     }
     // getters
     getDebugmode() {return this.debugmode}
+    getLevel() {return this.level}
 }
 /* 
 TODO LIAM
