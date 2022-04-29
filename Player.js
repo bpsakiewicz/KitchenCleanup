@@ -10,6 +10,7 @@ class Player extends Entity{
         this.alive = true;
         this.weapon = weapon;
         this.armor = armor;
+        this.weaponBehavior = new Star();
         this.health = 100;
         //this.ability = null; //implement abilitys??
         // sprite state
@@ -34,12 +35,12 @@ class Player extends Entity{
             Game.getInstance().destroy(other)
             if(this.health <= 0) {
                 // TODO: ADD DEATH STUFF HERE SEND PLAYER BACK TO MAIN MENU
-                Game.getInstance().destroy(this);
+                //dwaGame.getInstance().destroy(this);
             }
         }
     }
 
-    update(){
+    update(deltaTime){
         //adjusts position to velocity of player
         this.checkBoundaries();
         this.playerInput();
@@ -102,9 +103,13 @@ class Player extends Entity{
             var m = Math.sqrt( (mouse_dir.x * mouse_dir.x) + (mouse_dir.y * mouse_dir.y) )
             mouse_dir = createVector(mouse_dir.x / m, mouse_dir.y / m);
             var shoot_dir = createVector(mouse_dir.x *1000, mouse_dir.y *1000);
-            var bullet = new Projectile(new p5.Vector(player.pos.x + 60,player.pos.y+30), shoot_dir,"playerprojectile",500,50,bluebullet,new p5.Vector(40,40));
+            const bullet = this.weaponBehavior.shoot(player.pos.x,player.pos.y,mouse_dir.x,mouse_dir.y);
+            //var bullet = new Projectile(new p5.Vector(player.pos.x + 60,player.pos.y+30), shoot_dir,"playerprojectile",500,50,bluebullet,new p5.Vector(40,40));
             // console.log(bullet);
-            g.instantiate(bullet);
+            for(const b of bullet){
+                g.instantiate(b);
+            }
+            //g.instantiate(bullet[0]);
             // shooting animation
             this.spritestate = this.shootstate;
             this.shootFrames = 1;

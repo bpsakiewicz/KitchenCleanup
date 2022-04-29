@@ -30,6 +30,8 @@ function preload() {
   // bullets
   bluebullet = loadImage("assets/sprites/bullets/bulletb_ultra.png");
   redbullet = loadImage("assets/sprites/bullets/bulletr_ultra.png");
+  peabullet = loadImage("assets/sprites/bullets/pea.png")
+  starbullet = loadImage("assets/sprites/bullets/star.png")
   // sounds
   song= loadSound("assets/wombocombo.mp3");
   hit_sound = loadSound("assets/UI_Electric_11.mp3");
