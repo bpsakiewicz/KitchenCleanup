@@ -24,6 +24,6 @@ class Scrubs extends Armor{
     constructor(){
         super();
         this.health = 200;
-        this.name = "Scrubs";
+        this.name = "Hazmat";
     }
 }

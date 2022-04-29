@@ -8,6 +8,7 @@ class WeaponBehavior{
 class Pea extends WeaponBehavior{
     constructor(){
         super();
+        this.name = "PeaShooter";
         this.shoot_period = 1;
     }
     shoot(px,py,mx,my){
@@ -21,6 +22,7 @@ class Pea extends WeaponBehavior{
 class Bullet extends WeaponBehavior{
     constructor(){
         super();
+        this.name = "Rifle";
         this.shoot_period = 0.5;
     }
     shoot(px,py,mx,my){
@@ -32,6 +34,7 @@ class Bullet extends WeaponBehavior{
 class Star extends WeaponBehavior{
     constructor(){
         super();
+        this.name = "NinjaStar";
         this.shoot_period = 0.25;
     }
     shoot(px,py,mx,my){
