@@ -13,10 +13,6 @@ class Room {
 
     generateEnemies(levelNum) {
         const enemies = [];
-
-        // ADD NEW ENEMY TYPES TO THIS ARRAY
-        var enemyTypes = [["tomato", "circle"], ["garlic", "circle"]];
-        var enemyTypes = []
         for(let i = 0;  i < random(levelNum, levelNum + sqrt(levelNum)); i++) {
             let r = Math.random() * 3;
             // BENNY TODO
@@ -28,17 +24,13 @@ class Room {
             //this.enemies[i] = new Enemy(random(enemyTypes), levelNum);
         }
         //this.enemies[this.enemies.length] = new EnemyCarrot(levelNum);
-        this.enemies[this.enemies.length] = new SauceBoss(levelNum);
+        //this.enemies[this.enemies.length] = new SauceBoss(levelNum);
         return enemies;
     }
 
     update(deltaTime) {
         for(const enemy in this.enemies) {
             this.enemies[enemy].update(deltaTime);
-        }
-
-        if(this.enemies.length == 0) {
-            this.getEntryHallway.locked = false;
         }
     }
 
@@ -52,12 +44,6 @@ class Room {
         if(this.exit != null) {
             this.exit.drawHallway();
         }
-        /*
-        // Dear Benny,
-            I moved draw specifics to entity class
-            Sincereley,
-            Liam
-        */
         for (var i = 0; i < entities.length; i++) {
             entities[i].draw();
         }
@@ -67,22 +53,6 @@ class Room {
         // console.log(this.getExitHallway());
         this.enemies.splice(this.enemies.indexOf(entity), 1);
         // console.log(this.getExitHallway());
-    }
-
-    setEntryHallway(hallway) {
-        this.entry = hallway;
-    }
-
-    setExitHallway(hallway) {
-        this.exit = hallway;
-    }
-
-    getEntryHallway() {
-        return this.entry;
-    }
-
-    getExitHallway() {
-        return this.exit;
     }
 
     cleared() {

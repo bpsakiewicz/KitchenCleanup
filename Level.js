@@ -31,8 +31,6 @@ class Level {
                 default:
                     break;
             }
-            rooms[i - 1].setExitHallway(new Hallway(rooms[i - 1], rooms[i]));
-            rooms[i].setEntryHallway(rooms[i - 1].getExitHallway());
         }
         return rooms;
     }
@@ -42,24 +40,16 @@ class Level {
 
         // unlock current room's exit hallway
         if(this.currentRoom.cleared()) {
-            if(this.currentRoom.getExitHallway()){
-                this.currentRoom.getExitHallway().locked = false;
-            }
-
             if(this.roomNum + 1 == this.totalRooms) {
                 this.complete = true;
                 return;
             }
-        }
-        if(this.currentRoom.getExitHallway() != null) {
-            if(!this.currentRoom.getExitHallway().locked && this.currentRoom.getExitHallway().checkPlayerInHallway(this.player)) {
-                this.loadNextRoom();
-            }
+            this.loadNextRoom();
         }
     }
 
     loadNextRoom() {
-        // update the current room to be the next oned
+        // update the current room to be the next one
         this.currentRoom = this.rooms[this.roomNum + 1];
         this.roomNum++;
         this.currentRoom.generateEnemies(this.levelNum);
