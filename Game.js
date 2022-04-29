@@ -54,15 +54,14 @@ class Game {
         switch(this.gameState) {
             case "playing":
                 if(!this.player.alive) {
-                    // console.log("esjfsfkldj")
                     this.gameState = "playerDied";
                     break;
                 }
                 // playing game     
                 if(this.level.complete) {
-                    // console.log(this.level.levelNum);
+                    console.log(this.level.levelNum);
                     this.level = new Level(this.level.levelNum + 1);
-                    this.level.currentRoom.loadEnemies();
+                    this.level.currentRoom.load();
                     // console.log(this.level.currentRoom)
                 }
                 this.level.update(deltaTime);
@@ -122,6 +121,7 @@ class Game {
     }
     // getters
     getDebugmode() {return this.debugmode}
+    getLevel() {return this.level}
 }
 /* 
 TODO LIAM

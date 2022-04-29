@@ -1,5 +1,5 @@
 class Player extends Entity{
-    constructor(weapon,armor){
+    constructor(){
         //singleton
         if(Player.instance){
             throw new Error("Player already made!");
@@ -8,9 +8,12 @@ class Player extends Entity{
         Player.instance = this;
         //creates default player    
         this.alive = true;
-        this.weapon = weapon;
-        this.armor = armor;
-        this.health = 100;
+        this.faction = new MasterChefFactionFactory();
+        //this.faction = new SousChefFactionFactory();
+        //this.faction = new ExterminatorFactionFactory();
+        this.weaponBehavior = this.faction.createWeapon();
+        this.armor = this.faction.createArmor();
+        this.health = this.armor.health;
         //this.ability = null; //implement abilitys??
         // sprite state
         this.idlestate = new SpriteState([loadImage("assets/sprites/cook/cookidle0.png"),loadImage("assets/sprites/cook/cookidle1.png"),loadImage("assets/sprites/cook/cookidle2.png")])
@@ -20,6 +23,8 @@ class Player extends Entity{
         this.shootstate.setPeriod(1);
         this.shootFrames = 0;
         this.spritestate = this.idlestate;
+        this.shoot_time = 0;
+        this.canShoot = false;
 
     }
     //SINGLETON
@@ -39,14 +44,19 @@ class Player extends Entity{
         }
     }
 
-    update(){
+    update(deltaTime){
         //adjusts position to velocity of player
+        console.log(this.health);
         this.checkBoundaries();
         this.playerInput();
         this.pos.x += this.velocity.x;
         this.pos.y += this.velocity.y;
+        this.shoot_time += deltaTime;
         //console.log(this.getPos());
         //console.log(this.getVelocity());
+        if(this.shoot_time > this.weaponBehavior.shoot_period){
+            this.canShoot = true;
+        }
 
         // updates sprite
         if (this.spritestate == null) throw new Error("nro what");
@@ -65,19 +75,13 @@ class Player extends Entity{
 
     playerInput(){
         //takes player input from WASD and adjusts velocity
-        document.body.onclick = function() {
-            //console.log("plz")
-            //console.log(player);
-            // AIM EXAMPLE
-            /*
-            var mouse_dir = new p5.Vector(mouseX - this.pos.x, mouseY - this.pos.y)
-            console.log(mouse_dir);
-            var shoot_dir = p5.Vector.normalize(mouse_dir) * 200;
-            var bullet = new Projectile(new p5.Vector(player.pos.x + 60,player.pos.y+30), shoot_dir);
-            // console.log(bullet);
-            g.instantiate(bullet);
-            */
-        }
+        {document.body.onclick = function() {
+            if(player.canShoot){
+                player.shoot();
+                player.shoot_time = 0;
+                player.canShoot = false;
+            }
+        }}
         
         let dir = new p5.Vector(0,0,0);
         if (keyIsDown(65) || keyIsDown(37)) dir.x = -5;
@@ -102,9 +106,11 @@ class Player extends Entity{
             var m = Math.sqrt( (mouse_dir.x * mouse_dir.x) + (mouse_dir.y * mouse_dir.y) )
             mouse_dir = createVector(mouse_dir.x / m, mouse_dir.y / m);
             var shoot_dir = createVector(mouse_dir.x *1000, mouse_dir.y *1000);
-            var bullet = new Projectile(new p5.Vector(player.pos.x + 60,player.pos.y+30), shoot_dir,"playerprojectile",500,50,bluebullet,new p5.Vector(40,40));
-            // console.log(bullet);
-            g.instantiate(bullet);
+            const bullet = this.weaponBehavior.shoot(player.pos.x,player.pos.y,mouse_dir.x,mouse_dir.y);
+            //makes bullets
+            for(const b of bullet){
+                g.instantiate(b);
+            }
             // shooting animation
             this.spritestate = this.shootstate;
             this.shootFrames = 1;
