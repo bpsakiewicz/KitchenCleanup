@@ -21,6 +21,8 @@ class Player extends Entity{
         this.shootstate.setPeriod(1);
         this.shootFrames = 0;
         this.spritestate = this.idlestate;
+        this.shoot_time = 0;
+        this.canShoot = false;
 
     }
     //SINGLETON
@@ -46,8 +48,14 @@ class Player extends Entity{
         this.playerInput();
         this.pos.x += this.velocity.x;
         this.pos.y += this.velocity.y;
+        this.shoot_time += deltaTime;
         //console.log(this.getPos());
         //console.log(this.getVelocity());
+        console.log(this.shoot_time)
+        console.log(this.canShoot);
+        if(this.shoot_time > this.weaponBehavior.shoot_period){
+            this.canShoot = true;
+        }
 
         // updates sprite
         if (this.spritestate == null) throw new Error("nro what");
@@ -66,19 +74,13 @@ class Player extends Entity{
 
     playerInput(){
         //takes player input from WASD and adjusts velocity
-        document.body.onclick = function() {
-            //console.log("plz")
-            //console.log(player);
-            // AIM EXAMPLE
-            /*
-            var mouse_dir = new p5.Vector(mouseX - this.pos.x, mouseY - this.pos.y)
-            console.log(mouse_dir);
-            var shoot_dir = p5.Vector.normalize(mouse_dir) * 200;
-            var bullet = new Projectile(new p5.Vector(player.pos.x + 60,player.pos.y+30), shoot_dir);
-            // console.log(bullet);
-            g.instantiate(bullet);
-            */
-        }
+        {document.body.onclick = function() {
+            if(player.canShoot){
+                player.shoot();
+                player.shoot_time = 0;
+                player.canShoot = false;
+            }
+        }}
         
         let dir = new p5.Vector(0,0,0);
         if (keyIsDown(65) || keyIsDown(37)) dir.x = -5;

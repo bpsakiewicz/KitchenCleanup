@@ -1,6 +1,6 @@
 class WeaponBehavior{
     constructor(){
-        this.name = "Weapon"
+        this.shoot_period = 10;
     }
     //shoot();
 }
@@ -8,6 +8,7 @@ class WeaponBehavior{
 class Pea extends WeaponBehavior{
     constructor(){
         super();
+        this.shoot_period = 1;
     }
     shoot(px,py,mx,my){
         var shoot_dir = createVector(mx*500, my *500);
@@ -20,6 +21,7 @@ class Pea extends WeaponBehavior{
 class Bullet extends WeaponBehavior{
     constructor(){
         super();
+        this.shoot_period = 0.5;
     }
     shoot(px,py,mx,my){
         var shoot_dir = createVector(mx*1000, my *1000);
@@ -30,6 +32,7 @@ class Bullet extends WeaponBehavior{
 class Star extends WeaponBehavior{
     constructor(){
         super();
+        this.shoot_period = 0.25;
     }
     shoot(px,py,mx,my){
         var shoot_dir = createVector(mx*3000, my *3000);

@@ -77,7 +77,3 @@ function draw() {
   g.update(dt);
   timelastcalled = millis();
 }
-
-function mouseClicked() {
-  player.shoot();
-}
