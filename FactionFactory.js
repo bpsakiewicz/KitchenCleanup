@@ -39,6 +39,6 @@ class ExterminatorFactionFactory extends FactionFactory{
         return new Bullet();
     }
     createArmor(){
-        return new Scrubs();
+        return new Hazmat();
     }
 }
