@@ -31,15 +31,17 @@ class Game {
     }
     // remove an entity from the game
     destroy(entity) {
-
+        let len = this.entities.length;
         if(entity.getTag().includes("_enemy")) {
             this.level.currentRoom.destroy(entity);
         }
 
         for (var i = 0; i < this.entities.length; i++) {
             if (this.entities[i] === entity) 
+                //console.log("DESTROTING ",entity.getTag());
                 this.entities.splice(i,1);
         }
+        //console.assert(len != this.entities.length)
     }
 
     // simulation
@@ -59,7 +61,7 @@ class Game {
                 }
                 // playing game     
                 if(this.level.complete) {
-                    console.log(this.level.levelNum);
+                    //console.log(this.level.levelNum);
                     this.level = new Level(this.level.levelNum + 1);
                     this.level.currentRoom.load();
                     // console.log(this.level.currentRoom)
@@ -90,7 +92,7 @@ class Game {
                 }
                 break;
             case "playerDied":
-                console.log(this.gameState)
+                //console.log(this.gameState)
                 this.reset();
                 // player dies -> either restart or main menu
                 break;

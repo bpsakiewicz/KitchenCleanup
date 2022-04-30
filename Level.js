@@ -47,9 +47,10 @@ class Level {
 
         // unlock current room's exit hallway
         if(this.currentRoom.cleared()) {
+            //this.currentRoom.getExit().setActive(true);
             if(this.roomNum + 1 == this.totalRooms) {
                 this.complete = true;
-                Game.getInstance().destroy(this.currentRoom.getExit())
+                //Game.getInstance().destroy(this.currentRoom.getExit())
             }
             //this.loadNextRoom();
         }
@@ -60,7 +61,8 @@ class Level {
         let d = this.currentRoom.getExit()
         this.player.teleport(new p5.Vector(BOUNDS.x - d.getPos().x, d.getPos().y))
         d.setActive(false);
-        Game.getInstance().destroy(d)
+        this.currentRoom.getExit().destroy();
+        console.log(this.currentRoom.getExit().getActive())
         // update the current room to be the next one
         this.currentRoom = this.rooms[index];
         this.roomNum = index;

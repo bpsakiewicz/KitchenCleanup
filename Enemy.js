@@ -70,8 +70,8 @@ class Enemy extends Entity{
         pl_dir = p5.Vector.normalize(pl_dir);
         let m = Math.sqrt( (pl_dir.x * pl_dir.x) + (pl_dir.y * pl_dir.y) )
         pl_dir = createVector(pl_dir.x / m, pl_dir.y / m);
-        let shoot_dir = createVector(pl_dir.x *1000, pl_dir.y *1000);
-        let bullet = new Projectile(new p5.Vector(this.pos.x,this.pos.y), shoot_dir,"enemyprojectile",1000,50,redbullet,new p5.Vector(40,40));
+        let shoot_dir = createVector(pl_dir.x *700, pl_dir.y *700);
+        let bullet = new Projectile(new p5.Vector(this.pos.x,this.pos.y), shoot_dir,"enemyprojectile",1000,50,redbullet,new p5.Vector(80,80));
         // console.log(bullet);
         g.instantiate(bullet);
     }
@@ -174,46 +174,10 @@ class SauceBoss extends Enemy {
             pl_dir = p5.Vector.normalize(pl_dir);
             let m = Math.sqrt( (pl_dir.x * pl_dir.x) + (pl_dir.y * pl_dir.y) )
             pl_dir = createVector(pl_dir.x / m, pl_dir.y / m);
-            let shoot_dir = createVector(pl_dir.x *800, pl_dir.y *800);
-            let bullet = new Projectile(new p5.Vector(xc,yc), shoot_dir,"enemyprojectile",5000,50,redbullet,new p5.Vector(80,80));
+            let shoot_dir = createVector(pl_dir.x *700, pl_dir.y *700);
+            let bullet = new Projectile(new p5.Vector(xc,yc), shoot_dir,"enemyprojectile",5000,50,redbullet,new p5.Vector(100,100));
             // console.log(bullet);
             g.instantiate(bullet);
         }
     }
-    
-    /*
-    shoot() {
-        let center = new p5.Vector(this.pos.x + this.dimensions.x * 4, this.pos.y + this.dimensions.y * 4);
-        console.log(center.x, this.pos.x)
-        let d = random([0,1])
-        let pl_dir = createVector(Player.getInstance().getPos().x - center.x , Player.getInstance().getPos().y - center.y);
-        pl_dir = p5.Vector.normalize(pl_dir);
-        let m = Math.sqrt( (pl_dir.x * pl_dir.x) + (pl_dir.y * pl_dir.y) )
-        pl_dir = createVector(pl_dir.x / m, pl_dir.y / m);
-        let shoot_dir = createVector(pl_dir.x *800, pl_dir.y *800);
-        switch (d) {
-            case 0: 
-                play_sound(shoot1_sound);
-                let bullet = new Projectile(new p5.Vector(center.x,center.y), shoot_dir,"enemyprojectile",2500,50,redbullet,new p5.Vector(80,80));
-                g.instantiate(bullet);
-                break;
-            case 1:
-                    play_sound(shoot1_sound);
-                    let speed = 500;
-                    let bullets = [
-                        new Projectile(center, new p5.Vector(speed,0),"enemyprojectile",1000,25,redbullet,new p5.Vector(40,40)),
-                        new Projectile(center, new p5.Vector(0,speed),"enemyprojectile",1000,25,redbullet,new p5.Vector(40,40)),
-                        new Projectile(center, new p5.Vector(-speed,0),"enemyprojectile",1000,25,redbullet,new p5.Vector(40,40)),
-                        new Projectile(center, new p5.Vector(0,-speed),"enemyprojectile",1000,25,redbullet,new p5.Vector(40,40)),
-                        new Projectile(center, new p5.Vector(speed / 2, speed / 2),"enemyprojectile",1000,25,redbullet,new p5.Vector(40,40)),
-                        new Projectile(center, new p5.Vector(- speed / 2, speed / 2),"enemyprojectile",1000,25,redbullet,new p5.Vector(40,40)),
-                        new Projectile(center, new p5.Vector(speed / 2, - speed / 2),"enemyprojectile",1000,25,redbullet,new p5.Vector(40,40)),
-                        new Projectile(center, new p5.Vector(- speed / 2, - speed / 2),"enemyprojectile",1000,25,redbullet,new p5.Vector(40,40))
-                    ]
-                    for (var i = 0; i < bullets.length; i++) g.instantiate(bullets[i]);
-                break;
-        }
-    }
-    */
-
 }

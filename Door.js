@@ -15,6 +15,10 @@ class Door extends Entity {
         }
     }
 
+    destroy() {
+        Game.getInstance().destroy(this)
+    }
+
     setActive(bool) {this.active = bool};
     getActive() {return this.active}
 }

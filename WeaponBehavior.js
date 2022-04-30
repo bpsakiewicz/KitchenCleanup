@@ -12,7 +12,7 @@ class Pea extends WeaponBehavior{
         this.shoot_period = .75;
     }
     shoot(px,py,mx,my){
-        var shoot_dir = createVector(mx*1000, my *1000);
+        var shoot_dir = createVector(mx*1200, my *1200);
         var shoot_dir2 = createVector((mx-.2)*1000, (my-.2) *1000);
         var shoot_dir3 = createVector((mx+.2)*1000, (my+.2) *1000);
         return [new Projectile(new p5.Vector(px + 60,py+30), shoot_dir,"playerprojectile",200,100,peabullet,new p5.Vector(40,40)),new Projectile(new p5.Vector(px + 60,py+30), shoot_dir2,"playerprojectile",200,100,peabullet,new p5.Vector(40,40)),new Projectile(new p5.Vector(px + 60,py+30), shoot_dir3,"playerprojectile",200,100,peabullet,new p5.Vector(40,40))];
@@ -26,7 +26,7 @@ class Bullet extends WeaponBehavior{
         this.shoot_period = 0.5;
     }
     shoot(px,py,mx,my){
-        var shoot_dir = createVector(mx*1000, my *1000);
+        var shoot_dir = createVector(mx*1500, my *1500);
         return [new Projectile(new p5.Vector(px + 60,py+30), shoot_dir,"playerprojectile",400,75,bluebullet,new p5.Vector(40,40))];
     }
 }
