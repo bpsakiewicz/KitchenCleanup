@@ -49,7 +49,7 @@ class Game {
 
     // update entities and check collisions
     update(deltaTime) {
-        console.log(this.gameState)
+        //console.log(this.gameState)
 
         switch(this.gameState) {
             case "playing":

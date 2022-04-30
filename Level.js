@@ -3,33 +3,38 @@ class Level {
     constructor(levelNum) {
         this.player = Player.getInstance();
         this.levelNum = levelNum;
-        this.totalRooms = 5;
+        this.totalRooms = 8;
         this.rooms = []
         this.generateRooms();
         this.currentRoom = this.rooms[0];
-        this.currentRoom.generateEnemies(this.levelNum);
+        this.currentRoom.generateEnemies();
         this.roomNum = 0;
         this.complete = false;
+        this.entrance = this.currentRoom.getExit();
         //Game.getInstance().instantiate(new Door(new p5.Vector(500,500)))
     }
 
     generateRooms() {
-        this.rooms = [new Room(this.levelNum, 0, 0)];
+        this.rooms = [new Room(this.levelNum, 0, 0,0)];
         for(let i = 1; i < this.totalRooms; i++) {
-            // attach first room
+            // special room at end
+            if (i == this.totalRooms - 1) {
+                this.rooms[i] = new BossRoom(this.levelNum + i / 2, this.rooms[i - 1].x - 1, this.rooms[i - 1].y, i);
+                return;
+            }
             let direction = random([0, 1, 2, 3]);
             switch(direction){
                 case 0:
-                    this.rooms[i] = new Room(this.levelNum, this.rooms[i - 1].x - 1, this.rooms[i - 1].y);
+                    this.rooms[i] = new Room(this.levelNum + i / 2, this.rooms[i - 1].x - 1, this.rooms[i - 1].y, i);
                     break;
                 case 1:
-                    this.rooms[i] = new Room(this.levelNum, this.rooms[i - 1].x, this.rooms[i - 1].y - 1);
+                    this.rooms[i] = new Room(this.levelNum + i / 2, this.rooms[i - 1].x, this.rooms[i - 1].y - 1, i);
                     break;
                 case 2:
-                    this.rooms[i] = new Room(this.levelNum, this.rooms[i - 1].x + 1, this.rooms[i - 1].y);
+                    this.rooms[i] = new Room(this.levelNum + i / 2, this.rooms[i - 1].x + 1, this.rooms[i - 1].y, i);
                     break;
                 case 3:
-                    this.rooms[i] = new Room(this.levelNum, this.rooms[i - 1].x, this.rooms[i - 1].y + 1);
+                    this.rooms[i] = new Room(this.levelNum + i / 2, this.rooms[i - 1].x, this.rooms[i - 1].y + 1, i);
                     break;
                 default:
                     break;
@@ -57,6 +62,19 @@ class Level {
         // update the current room to be the next one
         this.currentRoom = this.rooms[this.roomNum + 1];
         this.roomNum++;
+        // load new level
+        this.currentRoom.generateEnemies(this.levelNum);
+        this.currentRoom.load();
+    }
+
+    loadRoom(index) {
+        console.log(index)
+        let d = this.currentRoom.getExit()
+        this.player.teleport(new p5.Vector(BOUNDS.x - d.getPos().x, d.getPos().y))
+        Game.getInstance().destroy(d)
+        // update the current room to be the next one
+        this.currentRoom = this.rooms[index];
+        this.roomNum = index;
         // load new level
         this.currentRoom.generateEnemies(this.levelNum);
         this.currentRoom.load();

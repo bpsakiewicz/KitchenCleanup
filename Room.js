@@ -1,27 +1,29 @@
 class Room {
 
-    constructor(levelNum, xCoor, yCoor) {
+    constructor(levelNum, xCoor, yCoor,index) {
         this.x = xCoor;
         this.y = yCoor;
+        this.index = index;
         this.size = (width, height); 
         this.enemies = [];
         this.obstacles = [];
         this.levelNum = levelNum;
-        this.exit = new Door(new p5.Vector(1150,400));
+        //console.log(this.index);
+        this.exit = new Door(new p5.Vector(1150,400),"exit",this);
         this.exit_active = false;
     }
 
-    generateEnemies(levelNum) {
+    generateEnemies() {
         const enemies = [];
-        levelNum += 1;
-        for(let i = 0;  i < random(levelNum, levelNum + sqrt(levelNum)); i++) {
+        //levelNum += 1;
+        for(let i = 0;  i < random(this.levelNum, this.levelNum + 2); i++) {
             let r = Math.random() * 3;
             // BENNY TODO
             // enemy spawn rates could change based on difficulty
             // enforce that some of level of diversity with larger amounts of enemies
-            if (r > 2) this.enemies[i] = new EnemyCarrot(levelNum);
-            else if (r > 1) this.enemies[i] = new EnemyTomato(levelNum);
-            else this.enemies[i] = new EnemyGarlic(levelNum);
+            if (r > 2) this.enemies[i] = new EnemyCarrot(this.levelNum);
+            else if (r > 1) this.enemies[i] = new EnemyTomato(this.levelNum);
+            else this.enemies[i] = new EnemyGarlic(this.levelNum);
             //this.enemies[i] = new Enemy(random(enemyTypes), levelNum);
         }
         //this.enemies[this.enemies.length] = new EnemyCarrot(levelNum);
@@ -63,6 +65,20 @@ class Room {
             g.instantiate(this.enemies[enemy])
         }
     }
-
+    // getters
     getExit() {return this.exit}
+    getIndex() {return this.index}
+}
+
+// boss romm
+class BossRoom extends Room {
+    constructor(levelNum, xCoor, yCoor,index) {
+        super(levelNum, xCoor, yCoor,index)
+        console.log("boss here");
+    }
+    // generate boss
+    generateEnemies() {
+        console.log("boss her gen e");
+        this.enemies = [new SauceBoss(this.levelNum)];
+    }
 }
