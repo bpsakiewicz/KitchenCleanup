@@ -8,9 +8,9 @@ class Level {
         this.generateRooms();
         this.currentRoom = this.rooms[0];
         this.currentRoom.generateEnemies();
+        //this.currentRoom.load();
         this.roomNum = 0;
         this.complete = false;
-        this.entrance = this.currentRoom.getExit();
         //Game.getInstance().instantiate(new Door(new p5.Vector(500,500)))
     }
 
@@ -60,22 +60,11 @@ class Level {
         }
     }
 
-    loadNextRoom() {
-        let d = this.currentRoom.getExit()
-        this.player.teleport(new p5.Vector(BOUNDS.x - d.getPos().x, d.getPos().y))
-        Game.getInstance().destroy(d)
-        // update the current room to be the next one
-        this.currentRoom = this.rooms[this.roomNum + 1];
-        this.roomNum++;
-        // load new level
-        this.currentRoom.generateEnemies(this.levelNum);
-        this.currentRoom.load();
-    }
-
     loadRoom(index) {
         console.log(index)
         let d = this.currentRoom.getExit()
         this.player.teleport(new p5.Vector(BOUNDS.x - d.getPos().x, d.getPos().y))
+        d.setActive(false);
         Game.getInstance().destroy(d)
         // update the current room to be the next one
         this.currentRoom = this.rooms[index];
@@ -93,7 +82,7 @@ class Level {
         textAlign(LEFT)
         // text("hello", width / 2, height/2)
         //tint(0,255)ds
-        text("Level: " + this.levelNum, 10, height - 40);
+        //text("Level: " + this.levelNum, 10, height - 40);
         text("Room: " + (this.roomNum + 1) + "/" + this.totalRooms, 10, height - 10);
         //can put this whereever or not use
         text("Health: " + player.health, 800, height - 60);
