@@ -3,7 +3,7 @@ class Level {
     constructor(levelNum) {
         this.player = Player.getInstance();
         this.levelNum = levelNum;
-        this.totalRooms = 5//int(this.levelNum + sqrt(this.levelNum));
+        this.totalRooms = int(this.levelNum + sqrt(this.levelNum));
         this.rooms = []
         this.generateRooms();
         this.currentRoom = this.rooms[0];
