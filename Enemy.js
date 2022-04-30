@@ -1,6 +1,6 @@
 class Enemy extends Entity{
     constructor(enemyType, levelNum) {
-        let spawn_range = 400;
+        let spawn_range = 300;
         super(new p5.Vector(random(spawn_range, width - spawn_range), random(spawn_range, height - spawn_range)), new p5.Vector(0, 0), enemyType[0] + "_enemy", enemyType[1], new p5.Vector(80, 80));
         switch(enemyType[0]) {
             case "tomato":
@@ -24,7 +24,7 @@ class Enemy extends Entity{
         this.health = this.lNum * 100;
         // for shoot behavior
         this.shoot_time = .2;
-        this.shoot_behavior = [.5,1];// min shoot time, randomness
+        this.shoot_behavior = [1,1];// min shoot time, randomness
         this.shoot_period = this.shoot_behavior[0] + Math.random() * this.shoot_behavior[1]
 }
 
@@ -97,7 +97,7 @@ class EnemyGarlic extends Enemy {
 class EnemyTomato extends Enemy {
     constructor(levelNum) {
         super(["tomato","circle"],levelNum)
-        this.shoot_behavior = [.75,2]
+        this.shoot_behavior = [1.5,1]
     }
 
     shoot() {
@@ -121,7 +121,7 @@ class EnemyTomato extends Enemy {
 class EnemyCarrot extends Enemy {
     constructor(levelNum) {
         super(["carrot","box"],levelNum)
-        this.shoot_behavior = [0.25,.75]
+        this.shoot_behavior = [0.5,.75]
     }
     shoot() {
         play_sound(shoot1_sound);
