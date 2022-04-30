@@ -72,14 +72,13 @@ function draw() {
   background(120,80,80);
   var time = millis();
   var dt = (time - timelastcalled) / 1000;
-  //image(ceil,0,60,1200,60)
-  // prints floor tiles
-  //for (var i = 60; i < 600; i+=60) {for (var j = 0; j < 600; j+=60) {image(floortile,j,i,60,60)}}
   fill(color(0,0,0,50))
   switch(g.gameState) {
     case "mainMenu":
-      // draw menu
-      console.log("main menu")
+      // draw main menu
+      // select faction for player
+      // which determines weapon and armor type
+      rectMode(CENTER);
       fill(130, 100, 100);
       rect(width / 2, height / 2.5, 500, 100);
       rect(width / 2, height / 1.7, 500, 100);
@@ -88,12 +87,9 @@ function draw() {
       textAlign(CENTER);
       textSize(50);
       text("Welcome    to    Kitchen    Cleanup!", width / 2, height / 7);
-      text("Select  Faction", width / 2, height / 4);
-      rectMode(CENTER);
-      text("Master Chef", width / 2, height / 2.5 + 20)
-      rectMode(CENTER);
-      text("Sous Chef", width / 2, height / 1.7 + 20)
-      rectMode(CENTER);
+      text("Select    Faction", width / 2, height / 4);
+      text("Master   Chef", width / 2, height / 2.5 + 20)
+      text("Sous   Chef", width / 2, height / 1.7 + 20)
       text("Exterminator", width / 2, height / 1.25 + 20)
       break;
     case "playing":
@@ -101,10 +97,16 @@ function draw() {
       g.update(dt);
       break;
     case "playerDied":
-      g.reset();
+      textSize(80);
+      fill(130, 100, 100);
+      rect(width / 2, height / 2, 500, 100);
+      fill(250, 230, 215);
+      textAlign(CENTER);
+      textSize(50);
+      text("Game    Over", width / 2, height / 7);
+      text("Return    to    menu", width / 2, height / 2 + 15);
     default:
       break;
-      // g.gameState = "mainMenu"
   }
 
   timelastcalled = millis();
@@ -129,7 +131,10 @@ function mouseClicked() {
         player.setup();
       }
       break;
-    case "playing":
+    case "playerDied":
+      if(mouseX >= width / 2 - 250 && mouseX <= width / 2 + 250 && mouseY >= height / 2 - 50 && mouseY <= height / 2+ 50) {
+        g.reset();
+      }
       //player.shoot();
       break;
   }
