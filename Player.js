@@ -158,6 +158,5 @@ class Player extends Entity{
         this.spritestate = this.idlestate;
         this.shoot_time = 0;
         this.canShoot = false;
-
     }
 }

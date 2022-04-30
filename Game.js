@@ -61,9 +61,9 @@ class Game {
                 }
                 // playing game     
                 if(this.level.complete) {
-                    //console.log(this.level.levelNum);
-                    this.level = new Level(this.level.levelNum + 1);
-                    this.level.currentRoom.load();
+                    console.log("here")
+                    this.gameState = "beatLevel"
+                    break;
                     // console.log(this.level.currentRoom)
                 }
                 this.level.update(deltaTime);
@@ -112,7 +112,6 @@ class Game {
     }
 
     reset() {
-        console.log("hello")
         this.level = new Level(1);
         this.player.reset();
         this.gameState = "mainMenu";

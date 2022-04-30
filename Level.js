@@ -3,7 +3,7 @@ class Level {
     constructor(levelNum) {
         this.player = Player.getInstance();
         this.levelNum = levelNum;
-        this.totalRooms = 8;
+        this.totalRooms = 5//int(this.levelNum + sqrt(this.levelNum));
         this.rooms = []
         this.generateRooms();
         this.currentRoom = this.rooms[0];
@@ -47,7 +47,11 @@ class Level {
 
         // unlock current room's exit hallway
         if(this.currentRoom.cleared()) {
-            //this.currentRoom.getExit().setActive(true);
+            for(const entity in Game.entities) {
+                if(Game.getInstance().entities[entity].getTag() != "player") {
+                    Game.getInstance().destroy(Game.getInstance().entities[entity])
+                }
+            }
             if(this.roomNum + 1 == this.totalRooms) {
                 this.complete = true;
                 //Game.getInstance().destroy(this.currentRoom.getExit())
