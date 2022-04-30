@@ -9,14 +9,13 @@ class Room {
         this.obstacles = [];
         this.levelNum = levelNum;
         //console.log(this.index);
-        this.exit = new Door(new p5.Vector(1150,400),"exit",this);
-        this.exit_active = false;
+        this.exit = new Door(new p5.Vector(1175,400),"exit",this);
     }
 
     generateEnemies() {
         const enemies = [];
         //levelNum += 1;
-        for(let i = 0;  i < random(this.levelNum, this.levelNum + 2); i++) {
+        for(let i = 0;  i < random(this.levelNum, this.levelNum + 1); i++) {
             let r = Math.random() * 3;
             // BENNY TODO
             // enemy spawn rates could change based on difficulty
@@ -35,14 +34,23 @@ class Room {
         for(const enemy in this.enemies) {
             this.enemies[enemy].update(deltaTime);
         }
-        if (this.cleared() && !this.exit_active) {
+        if (this.cleared() && !this.exit.getActive()) {
             Game.getInstance().instantiate(this.exit)
-            this.exit_active = true;
+            this.exit.setActive(true);
         }
     }
 
     drawRoom(entities) {
         image(wall,0,0,1200,60);
+        
+        image(wall,1150,325,50,60);
+        image(wall,0,325,50,60);
+            // filling out the black
+            fill(color(0,0,0,255));
+            rect(1175,25,50,600);
+            rect(1175,800,50,600);
+            rect(25,25,50,600);
+            rect(25,800,50,600);
         // console.log(this.hall)
         for (var i = 0; i < entities.length; i++) {
             entities[i].draw();
@@ -64,6 +72,7 @@ class Room {
         for(const enemy in this.enemies) {
             g.instantiate(this.enemies[enemy])
         }
+        g.instantiate(this.exit)
     }
     // getters
     getExit() {return this.exit}

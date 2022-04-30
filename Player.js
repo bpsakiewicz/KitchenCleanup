@@ -89,10 +89,10 @@ class Player extends Entity{
         }}
         
         let dir = new p5.Vector(0,0,0);
-        if (keyIsDown(65) || keyIsDown(37)) dir.x = -5;
-        if (keyIsDown(68) || keyIsDown(39)) dir.x = 5;
-        if (keyIsDown(87) || keyIsDown(38)) dir.y = -5;
-        if (keyIsDown(83) || keyIsDown(40)) dir.y = 5;
+        if (keyIsDown(65) || keyIsDown(37)) dir.x = -8;
+        if (keyIsDown(68) || keyIsDown(39)) dir.x = 8;
+        if (keyIsDown(87) || keyIsDown(38)) dir.y = -8;
+        if (keyIsDown(83) || keyIsDown(40)) dir.y = 8;
 
         // implement rate of fire in this if condition maybe
         // use mouseIsPressed for mouse hold

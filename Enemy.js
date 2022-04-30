@@ -131,7 +131,7 @@ class EnemyCarrot extends Enemy {
         let m = Math.sqrt( (pl_dir.x * pl_dir.x) + (pl_dir.y * pl_dir.y) )
         pl_dir = createVector(pl_dir.x / m, pl_dir.y / m);
         let shoot_dir = createVector(pl_dir.x *800, pl_dir.y *800);
-        let bullet = new Projectile(new p5.Vector(this.pos.x + 40,this.pos.y + 40), shoot_dir,"enemyprojectile",5000,50,redbullet,new p5.Vector(40,40));
+        let bullet = new Projectile(new p5.Vector(this.pos.x + 40,this.pos.y + 40), shoot_dir,"enemyprojectile",5000,25,redbullet,new p5.Vector(40,40));
         // console.log(bullet);
         g.instantiate(bullet);
     }
