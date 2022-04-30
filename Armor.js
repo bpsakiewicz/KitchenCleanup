@@ -20,7 +20,7 @@ class Bandana extends Armor{
     }
 }
 
-class Scrubs extends Armor{
+class Hazmat extends Armor{
     constructor(){
         super();
         this.health = 200;
