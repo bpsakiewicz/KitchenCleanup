@@ -36,13 +36,14 @@ function preload() {
   starbullet = loadImage("assets/sprites/bullets/star.png")
   // sounds
   song= loadSound("assets/song.mp3");
+  song.setVolume(0.2)
   hit_sound = loadSound("assets/UI_Electric_11.mp3");
   hit1_sound = loadSound("assets/Arcade Creature Hit Pop 4.wav")
   shoot_sound = loadSound("assets/Play Game Mech Hit 7.wav");
   shoot1_sound = loadSound("assets/UI Hits Game 1.wav")
-  shoot_sound.setVolume(0.5);
-  shoot1_sound.setVolume(0.5);
-  hit1_sound.setVolume(0.5);
+  shoot_sound.setVolume(0.2);
+  shoot1_sound.setVolume(0.2);
+  hit1_sound.setVolume(0.2);
 }
 // function to randomize sound pitch
 function play_sound(sound) {
@@ -78,33 +79,17 @@ function draw() {
       // draw main menu
       // select faction for player
       // which determines weapon and armor type
-      rectMode(CENTER);
-      fill(130, 100, 100);
-      rect(width / 2, height / 2.5, 500, 100);
-      rect(width / 2, height / 1.7, 500, 100);
-      rect(width / 2, height / 1.25, 500, 100);
-      fill(250, 230, 215);
-      textAlign(CENTER);
-      textSize(50);
-      text("Welcome    to    Kitchen    Cleanup!", width / 2, height / 7);
-      text("Select    Faction", width / 2, height / 4);
-      text("Master   Chef", width / 2, height / 2.5 + 20)
-      text("Sous   Chef", width / 2, height / 1.7 + 20)
-      text("Exterminator", width / 2, height / 1.25 + 20)
+      drawMenu();
       break;
     case "playing":
-      g.draw();
-      g.update(dt);
+      drawGameplay(dt);
       break;
     case "playerDied":
-      textSize(80);
-      fill(130, 100, 100);
-      rect(width / 2, height / 2, 500, 100);
-      fill(250, 230, 215);
-      textAlign(CENTER);
-      textSize(50);
-      text("Game    Over", width / 2, height / 7);
-      text("Return    to    menu", width / 2, height / 2 + 15);
+      drawLoseScreen();
+      break;
+    case "beatLevel":
+      drawBeatLevel();
+      break;
     default:
       break;
   }
@@ -135,8 +120,58 @@ function mouseClicked() {
       if(mouseX >= width / 2 - 250 && mouseX <= width / 2 + 250 && mouseY >= height / 2 - 50 && mouseY <= height / 2+ 50) {
         g.reset();
       }
-      //player.shoot();
+      break;
+    case "beatLevel":
+      if(mouseX >= width / 2 - 250 && mouseX <= width / 2 + 250 && mouseY >= height / 2 - 50 && mouseY <= height / 2+ 50) {
+        g.level = new Level(g.level.levelNum + 1);
+        g.level.currentRoom.load();
+        g.gameState = "playing"
+        console.log(g)
+      }
       break;
   }
   // player.shoot();
+}
+
+function drawMenu() {
+  rectMode(CENTER);
+  fill(130, 100, 100);
+  rect(width / 2, height / 2.5, 500, 100);
+  rect(width / 2, height / 1.7, 500, 100);
+  rect(width / 2, height / 1.25, 500, 100);
+  fill(250, 230, 215);
+  textAlign(CENTER);
+  textSize(50);
+  text("Welcome    to    Kitchen    Cleanup!", width / 2, height / 7);
+  text("Select    Faction", width / 2, height / 4);
+  text("Master   Chef", width / 2, height / 2.5 + 20)
+  text("Sous   Chef", width / 2, height / 1.7 + 20)
+  text("Exterminator", width / 2, height / 1.25 + 20)
+}
+
+function drawGameplay(dt) {
+  g.draw();
+  g.update(dt);
+}
+
+function drawLoseScreen() {
+  textSize(80);
+  fill(130, 100, 100);
+  rect(width / 2, height / 2, 500, 100);
+  fill(250, 230, 215);
+  textAlign(CENTER);
+  textSize(50);
+  text("Game    Over", width / 2, height / 7);
+  text("Return    to    menu", width / 2, height / 2 + 15);
+}
+
+function drawBeatLevel() {
+  textSize(80);
+  fill(130, 100, 100);
+  rect(width / 2, height / 2, 500, 100);
+  fill(250, 230, 215);
+  textAlign(CENTER);
+  textSize(50);
+  text("You    beat    level    " + g.level.levelNum, width / 2, height / 7);
+  text("Continue", width / 2, height / 2 + 15);
 }

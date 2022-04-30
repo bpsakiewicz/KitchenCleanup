@@ -77,7 +77,7 @@ class Enemy extends Entity{
     }
 
     takeDamage(damage) {
-        console.log(this.health);
+        // console.log(this.health);
         this.health -= damage;
         this.hit()
         play_sound(hit_sound)
